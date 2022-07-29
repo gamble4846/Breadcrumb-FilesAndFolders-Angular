@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './Components/left-menu/left-menu.component';
+import { RightMenuComponent } from './Components/right-menu/right-menu.component';
 
 registerLocaleData(en);
 
@@ -19,7 +20,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     NavBarComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    RightMenuComponent
   ],
   imports: [
     BrowserModule,
