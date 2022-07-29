@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './Components/left-menu/left-menu.component';
 import { RightMenuComponent } from './Components/right-menu/right-menu.component';
+import { RightClickMenuComponent } from './Components/right-click-menu/right-click-menu.component';
 
 registerLocaleData(en);
 
@@ -21,7 +22,8 @@ registerLocaleData(en);
     AppComponent,
     NavBarComponent,
     LeftMenuComponent,
-    RightMenuComponent
+    RightMenuComponent,
+    RightClickMenuComponent
   ],
   imports: [
     BrowserModule,
