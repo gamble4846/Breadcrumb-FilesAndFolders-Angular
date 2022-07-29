@@ -1,0 +1,20 @@
+<div class="gs-dropbox-navbar">
+  <div class="gs-dropbox-navbar-left">
+      <img src="../../../assets/images/fullLogo.png" class="gs-dropbox-logo-in-navbar-left">
+  </div>
+  <div class="gs-dropbox-navbar-right">
+      <div class="gs-hamburger-container">
+          <img src="../../../assets/svgs/hamburger.svg" class="gs-hamburger-icon" (click)="toggleLeftMenu()">
+      </div>
+      <div class="gs-dropbox-navbar-right-search-container" id="gs-dropbox-navbar-right-search-container">
+          <span class="gs-dropbox-search-icon-container"><img src="../../../assets/svgs/search.svg" class="gs-dropbox-search-icon"></span>
+          <input type="text" class="gs-dropbox-navbar-right-search-input" placeholder="Search" (focus)="updateSearchTextBox(true)">
+          <span class="gs-dropbox-cancel-icon-container"><img src="../../../assets/svgs/cancel.svg" class="gs-dropbox-cancel-icon" (click)="updateSearchTextBox(false)"></span>
+      </div>
+      <div class="gs-dropbox-navbar-right-icons-container">
+          <img src="../../../assets/svgs/questionMakr.svg" class="gs-dropbox-navbar-right-icon">
+          <img src="../../../assets/svgs/notifcation.svg" class="gs-dropbox-navbar-right-icon">
+          <img src="../../../assets/images/man.jpg" class="gs-dropbox-navbar-right-user-icon gs-image-round ">
+      </div>
+  </div>
+</div>

@@ -1,0 +1,887 @@
+
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@import "~ng-zorro-antd/button/style/index.min.css";  /* Import one component's styles */
+
+:root{
+  --gs-dropbox-nav-bar-height: 50px;
+  --gs-dropbox-padding: 8px;
+  --gs-dropbox-left-width: 240px;
+  --gs-dropbox-right-width: 56px;
+  --gs-common-border: 1px;
+  --gs-dropbox-navbar-right-search-container-width: 40%;
+  --gs-dropbox-navbar-right-icons-width: 15%;
+  --gs-dropbox-navbar-right-icon-size: 25px;
+  --gs-dropbox-navbar-right-user-icon-size: 30px;
+  --gs-right-panel-section-container-height: 56px;
+  --gs-right-panel-section-content-header-height: 56px;
+  --gs-bropbox-center-bread-crumb-and-layout-button-container-height: 56px;
+  --gs-dropbox-center-header-buttons-container-height: 56px;
+  --gs-dropbox-center-common-padding: 30px;
+  --gs-dropbox-search-modal-header-height: 50px;
+  --gs-dropbox-file-model-header-height: 70px;
+  --gs-dropbox-file-model-footer-height: 70px;
+  --gs-drop-box-right-click-menu-width: 250px;
+}
+
+*, ::after, ::before {
+  box-sizing: inherit;
+}
+
+body{
+  font-family: 'Poppins';
+  padding: 0;
+  margin: 0;
+}
+
+.gs-dropbox-main-container{
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
+}
+
+.gs-dropbox-navbar{
+  height: calc(var(--gs-dropbox-nav-bar-height) - ((var(--gs-dropbox-padding) * 2) + var(--gs-common-border)));
+  padding: var(--gs-dropbox-padding);
+  display: flex;
+  border-bottom: var(--gs-common-border) solid #ede9e3;
+}
+
+.gs-dropbox-container{
+  height: calc(100vh - var(--gs-dropbox-nav-bar-height));
+  display: flex;
+}
+
+.gs-dropbox-left{
+  height: 100%;
+  width: calc(var(--gs-dropbox-left-width) - var(--gs-common-border));
+  min-width: calc(var(--gs-dropbox-left-width) - var(--gs-common-border));
+  max-width: calc(var(--gs-dropbox-left-width) - var(--gs-common-border));
+  background-color: #f7f5f2;
+  border-right: var(--gs-common-border) solid #ede9e3;
+}
+
+.gs-bropbox-center{
+  height: 100%;
+  width: calc(100% - (var(--gs-dropbox-left-width) + var(--gs-dropbox-right-width)));
+}
+
+.gs-dropbox-right{
+  height: 100%;
+  width: calc(var(--gs-dropbox-right-width) - var(--gs-common-border));
+  border-left: var(--gs-common-border) solid #c9c5be;
+  transition: 0.3s ease-in-out;
+}
+
+.rightPanelSectionContainer.open{
+  height: max-content;
+  cursor: default;
+}
+
+.rightPanelSectionIconAndTitleContainer{
+  height: var(--gs-right-panel-section-container-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.gs-dropbox-right.open .rightPanelSectionContainer.open .rightPanelSectionIconAndTitleContainer{
+  display: none;
+}
+
+.rightPanelSectionContent{
+  height: calc(100vh - ((var(--gs-right-panel-section-container-height) * 3) + var(--gs-dropbox-nav-bar-height) + 4px));
+  width: 100%;
+  display: none;
+}
+
+.gs-dropbox-right.open .rightPanelSectionContainer.open .rightPanelSectionContent{
+  display: block;
+}
+
+.gs-dropbox-right.open{
+  --gs-dropbox-right-width: 328px;
+}
+
+.gs-dropbox-right-container{
+  height: 100%;
+}
+
+.panelOpenCloseIconContainer{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
+.folderTitleContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: var(--gs-common-border) solid #c9c5be;
+  height: var(--gs-right-panel-section-container-height);
+  overflow: hidden;
+}
+
+.folderTitle{
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+  padding: 0px 10px;
+}
+
+.rightPanelSectionTitle{
+  font-size: 14px;
+  width: 70%;
+  padding: 0px 10px;
+  display: none;
+  white-space: nowrap;
+}
+
+.gs-dropbox-right.open .rightPanelSectionContainer{
+  border-bottom: var(--gs-common-border) solid #c9c5be;
+}
+
+.gs-dropbox-right.open .panelOpenCloseIconContainer{
+  padding: 0px 10px;
+}
+
+.gs-dropbox-right.open .rightPanelSectionTitle{
+  display: block;
+}
+
+.gs-dropbox-right.open .folderTitleContainer{
+  justify-content: space-between;
+}
+
+.gs-dropbox-right.open .folderTitle{
+  display: block;
+}
+
+.gs-dropbox-right.open .rightPanelSectionContainer{
+  justify-content: start;
+  padding: 0px 10px;
+}
+
+.rightPanelSectionContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--gs-right-panel-section-container-height);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.rightPanelIconContainer{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
+.rightPanelSectionIcon{
+  cursor: pointer;
+}
+
+.panelOpenCloseIcon{
+  transform: rotate(180deg);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.gs-dropbox-right.open .panelOpenCloseIcon{
+  transform: rotate(0deg);
+}
+
+.gs-dropbox-navbar-left{
+  width: var(--gs-dropbox-left-width);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.gs-dropbox-navbar-right{
+  width: calc(100% - var(--gs-dropbox-left-width));
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.gs-dropbox-logo-in-navbar-left{
+  height: 70%;
+}
+
+.gs-dropbox-navbar-right-search-container{
+  width: var(--gs-dropbox-navbar-right-search-container-width);
+  height: calc(100% - (var(--gs-common-border) * 2));
+  display: flex;
+  justify-content: left;
+  transition: 0.3s ease-in-out;
+}
+
+.gs-dropbox-navbar-right-search-input{
+  width: calc(100% - 25px);
+  height: 100%;
+  margin: 0px;
+  border: var(--gs-common-border) solid #8c8279;
+  border-left: 0px;
+  border-right: 0px;
+  outline: 0px !important;
+  padding: 0px;
+  transition: 0.3s ease-in-out;
+}
+
+.gs-dropbox-search-icon{
+  width: 20px;
+}
+
+.gs-dropbox-search-icon-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: var(--gs-common-border) solid #8c8279;
+  height: 100%;
+  padding: 0px 5px;
+  border-right: 0px;
+}
+
+.gs-dropbox-cancel-icon{
+  opacity: 0;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.gs-dropbox-cancel-icon-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: var(--gs-common-border) solid #8c8279;
+  height: 100%;
+  padding: 0px 5px;
+  border-left: 0px;
+}
+
+.gs-dropbox-navbar-right-search-container.active .gs-dropbox-cancel-icon{
+  opacity: 1;
+}
+
+.gs-dropbox-navbar-right-icons-container{
+  width: var(--gs-dropbox-navbar-right-icons-width);
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gs-dropbox-navbar-right-search-container.active{
+  --gs-dropbox-navbar-right-search-container-width: 85%;
+}
+
+.gs-dropbox-navbar-right-icon{
+  height: var(--gs-dropbox-navbar-right-icon-size);
+  width: var(--gs-dropbox-navbar-right-icon-size);
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.gs-image-round{
+  border-radius: 50%;
+}
+
+.gs-dropbox-navbar-right-user-icon{
+  height: var(--gs-dropbox-navbar-right-user-icon-size);
+  width: var(--gs-dropbox-navbar-right-user-icon-size);
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.gs-dropbox-left-list{
+  list-style-type: none;
+  margin: 0px;
+  padding-top: 8px;
+}
+
+.gs-dropbox-left-list li{
+  padding: 8px 0px;
+  font-size: 16px;
+  color: rgba(82,74,62,.82);
+}
+
+.gs-dropbox-left-list li span{
+  cursor: pointer;
+}
+
+.gs-dropbox-left-list li span:hover{
+  color: #1e1919;
+}
+
+.rightPanelContentHeader{
+  display: flex;
+  height: var(--gs-right-panel-section-content-header-height);
+  align-items: center;
+}
+
+.rightPanelContentHeaderIconContainer{
+  display: flex;
+  align-items: center;
+}
+
+.rightPanelContentHeaderTitle{
+  padding: 0px 5px;
+  font-size: 14px;
+}
+
+.rightPanelContentBody{
+  height: calc(100% - (var(--gs-right-panel-section-content-header-height) + 10px));
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0161ff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #003488;
+}
+
+.gs-bropbox-center-bread-crumb-and-layout-button-container{
+  height: var(--gs-bropbox-center-bread-crumb-and-layout-button-container-height);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0px var(--gs-dropbox-center-common-padding);
+}
+
+.gs-bropbox-center-bread-crumb-container{
+  width: calc(90% - 10px);
+  padding-right: 10px;
+}
+
+.gs-bropbox-center-layout-button-container{
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.gs-bropbox-center-layout-button-downArrow{
+  height: 15px;
+  width: 15px;
+  display: block;
+}
+
+.gs-bropbox-center-bread-crumb{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  overflow-x: auto;
+  display: flex;
+}
+
+.gs-bread-crumb-alternate{
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  white-space: nowrap;
+  width: calc(90% - 10px);
+  padding-right: 10px;
+}
+
+.gs-bropbox-center-bread-crumb li{
+  font-size: 16px;
+  color: #797369;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.gs-bropbox-center-bread-crumb li:hover span{
+  text-decoration: underline;
+}
+
+.gs-bropbox-center-bread-crumb li:last-child:after {
+  content: "";
+}
+
+.gs-bropbox-center-bread-crumb li:last-child:hover span{
+  text-decoration: none;
+}
+
+.gs-bropbox-center-bread-crumb li::after{
+  content: "/";
+  padding: 0px 10px;
+  font-size: 14px;
+  color: #797369;
+  cursor: default;
+  font-style: italic;
+}
+
+.gs-bropbox-center-bread-crumb li:last-child{
+  color: black;
+  cursor: default;
+}
+
+.gs-dropbox-center-header-buttons-container{
+  display: flex;
+  height: var(--gs-dropbox-center-header-buttons-container-height);
+  padding: 0px var(--gs-dropbox-center-common-padding);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uploadButtonContentUploadIcon{
+  transform: rotate(-90deg);
+  filter: brightness(0) invert(1);
+}
+
+.uploadButtonContentDownArrow{
+  height: 18px;
+  width: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.createButtonContentDownArrow{
+  height: 18px;
+  width: 18px;
+}
+
+.uploadButtonContentText{
+  padding: 0px 5px;
+}
+
+.createButtonContentText{
+  padding: 0px 5px;
+}
+
+.uploadButtonContent{
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.createButtonContent{
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.gs-squareButtonBlue{
+  background-color: #0161ff;
+  color: white;
+  padding: 0px 10px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-right: 16px;
+  position: relative;
+}
+
+.gs-squareButtonBlue:hover{
+  background-color: #0057e5;
+}
+
+.gs-squareButtonGrey{
+  color: #1e1919;
+  background-color: #f3f0eb;
+  padding: 0px 10px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-right: 16px;
+  position: relative;
+}
+
+.gs-squareButtonNextPrevious{
+  color: #1e1919;
+  background-color: #f3f0eb;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 90px;
+}
+
+.gs-squareButtonNextPrevious:hover{
+  background-color: #e9e3da;
+}
+
+.gs-squareButtonGrey:hover{
+  background-color: #e9e3da;
+}
+
+.gs-dropbox-center-header-buttons-container-left{
+  display: flex;
+  height: var(--gs-dropbox-center-header-buttons-container-height);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.OnePXBarVerticle{
+  height: 32px;
+  width: 1px;
+  background-color: #c9c5be;
+  margin-right: 16px;
+}
+
+.padding-5x-imp{
+  padding: 0px 5px !important;
+}
+
+.gs-dropbox-center-folder-files-container{
+  height: calc(100vh - ((56px * 2) + var(--gs-dropbox-nav-bar-height) + (var(--gs-dropbox-center-common-padding) * 2)));
+  overflow: auto;
+  padding: var(--gs-dropbox-center-common-padding);
+}
+
+.gs-folder-files-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gs-folder-files-table tr{
+  border-bottom: 1px solid #ede9e3;
+  height: 40px;
+}
+
+.gs-folder-files-table th div{
+  text-align: left;
+  font-size: 14px;
+}
+
+.gs-folder-files-table-tr-hover{
+  background-color: #d6e6ff !important;
+}
+
+.gs-drop-box-right-click-menu-section{
+  padding: 8px 0px;
+  border-bottom: 1px solid #eae5de;
+}
+
+.gs-drop-box-right-click-menu-name{
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 16px;
+}
+
+.gs-drop-box-right-click-menu-button{
+  padding: 5px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.gs-drop-box-right-click-menu-button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gs-folder-files-table tbody tr:hover{
+  background-color: #f7f5f2;
+}
+
+.gs-drop-box-right-click-menu-button-left{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.gs-drop-box-right-click-menu-button-left-icon{
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}
+
+
+.gs-drop-box-right-click-menu-button:hover{
+  background-color: #f0ece6;
+}
+
+.gs-drop-box-right-click-menu-arrow{
+  transform: rotate(-90deg);
+  height: 17px;
+  width: 17px;
+}
+
+.gs-drop-box-right-click-menu-button-left-text{
+  display: flex;
+  align-items: center;
+  color: #1e1919 !important;
+}
+
+.fileFolderContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fileFolderIconContainer{
+  display: flex;
+  align-items: center;
+}
+
+.fileFolderRight{
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.fileFolderName{
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.fileFolderLeft{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.eclipsis-div{
+  min-width: 10px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gs-hamburger-container{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  cursor: pointer;
+}
+
+.gs-dropbox-search-modal{
+  width: 0;
+  height: calc(100vh - var(--gs-dropbox-nav-bar-height));
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  transition: 0.3s ease-in-out;
+}
+
+.gs-dropbox-search-modal.open{
+  width: calc(100vw - var(--gs-dropbox-left-width));
+}
+
+.gs-dropbox-search-modal-header{
+  height: var(--gs-dropbox-search-modal-header-height);
+  padding: 20px;
+}
+
+.gs-dropbox-search-modal-content{
+  margin: 20px;
+  height: calc(100% - (var(--gs-dropbox-search-modal-header-height) + (20px * 2) + (20px * 2)));
+  overflow: auto;
+}
+
+.gs-dropbox-searh-result-title{
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.gs-dropbox-searh-result-filters-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.gs-dropbox-searh-result-filter{
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #f3f0eb;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.gs-dropbox-searh-result-filter-down-arrow{
+  width: 15px;
+  height: 15px;
+}
+
+.gs-dropbox-file-model{
+  width: 0px;
+  height: 0px;
+  background-color: white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: 0.8s ease-in-out;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.gs-dropbox-file-model.open{
+  width: calc(100vw - 20px);
+  height: calc(100vh - 20px);
+}
+
+.gs-dropbox-file-model-header{
+  height: var(--gs-dropbox-file-model-header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+}
+
+.gs-dropbox-file-model-header-close-button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.gs-dropbox-file-model-footer{
+  height: var(--gs-dropbox-file-model-footer-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gs-dropbox-file-model-content{
+  height: calc(100% - (var(--gs-dropbox-file-model-header-height) + var(--gs-dropbox-file-model-footer-height)));
+}
+
+.gs-dropbox-file-model-content-google-drive-embbed{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gs-dropbox-file-model-content-google-drive-embbed iframe{
+  width: calc(100% - 20px);
+  height: 100%;
+  border-width: 0px;
+}
+
+.gs-drop-box-right-click-menu{
+  background-color: #fbfaf9;
+  width: 0px;
+  height: 0px;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.gs-drop-box-right-click-menu.open{
+  width: var(--gs-drop-box-right-click-menu-width);
+  border: 1px solid #c5cedb;
+  height: max-content;
+}
+
+.gs-drop-down-for-header-buttons{
+  width: var(--gs-drop-box-right-click-menu-width);
+  height: max-content;
+  background-color: #fbfaf9;
+  border: 1px solid #c5cedb;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 5px);
+  overflow-y: auto;
+  display: none;
+}
+
+.gs-drop-down-for-header-buttons.open{
+  display: block;
+}
+
+@media screen and (max-width: 1050px) {
+  .gs-dropbox-right {
+      display: none;
+  }
+
+  :root{
+      --gs-dropbox-right-width: 0px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .gs-dropbox-left {
+      position: fixed;
+      left: calc(var(--gs-dropbox-left-width) - (var(--gs-dropbox-left-width) * 2));
+      top: var(--gs-dropbox-nav-bar-height);
+      z-index: 1;
+      transition: 0.3s ease-in-out;
+  }
+
+  .gs-dropbox-left.open{
+      left: 0;
+  }
+
+  :root{
+      --gs-dropbox-navbar-right-search-container-width: 65%;
+      --gs-dropbox-navbar-right-icons-width: 25%;
+  }
+
+  .gs-dropbox-navbar-right{
+      width: 100%;
+  }
+
+  .gs-bropbox-center{
+      width: 100%;
+  }
+
+  .gs-dropbox-navbar-left{
+      display: none;
+  }
+
+  .gs-dropbox-navbar-right{
+      justify-content: space-between;
+  }
+
+  .gs-dropbox-navbar-right-search-container.active{
+      --gs-dropbox-navbar-right-search-container-width: 65%;
+  }
+
+  .gs-hamburger-container{
+      display: flex;
+  }
+
+  .gs-dropbox-search-modal.open{
+      width: 100vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hideBefore600{
+      display: none;
+  }
+
+  :root{
+      --gs-dropbox-center-common-padding: 15px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .hideAfter600{
+      display: none;
+  }
+}
+
