@@ -13,11 +13,6 @@ export class FileViewerComponent implements OnInit {
 
   }
 
-openFile(){
-  var fileModel:any = document.getElementById("gs-dropbox-file-model");
-  fileModel.classList.add("open");
-}
-
 closeFile(){
   var fileModel:any = document.getElementById("gs-dropbox-file-model");
   fileModel.classList.remove("open");

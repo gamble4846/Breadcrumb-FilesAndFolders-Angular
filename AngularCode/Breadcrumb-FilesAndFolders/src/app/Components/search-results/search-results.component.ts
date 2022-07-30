@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
 
 @Component({
   selector: 'app-search-results',
@@ -7,13 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _cs : CommonServicesService) { }
 
   ngOnInit(): void {
-  }
-
-  openFile(){
-    var fileModel:any = document.getElementById("gs-dropbox-file-model");
-    fileModel.classList.add("open");
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
 
 @Component({
   selector: 'app-folders-files',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoldersFilesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _cs : CommonServicesService) { }
 
   ngOnInit(): void {
     var rightClickElements = document.getElementsByClassName("allowRightClick");
@@ -85,10 +86,4 @@ export class FoldersFilesComponent implements OnInit {
     var dropDown:any = document.getElementById("gs-drop-down-for-create-button");
     dropDown.classList.add("open");
   }
-
-  openFile(){
-    var fileModel:any = document.getElementById("gs-dropbox-file-model");
-    fileModel.classList.add("open");
-  }
-
 }
