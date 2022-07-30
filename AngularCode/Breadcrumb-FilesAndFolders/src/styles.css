@@ -25,6 +25,10 @@
   --gs-drop-box-right-click-menu-width: 250px;
 }
 
+router-outlet{
+  display: none;
+}
+
 *, ::after, ::before {
   box-sizing: inherit;
 }
@@ -64,7 +68,7 @@ body{
 
 .gs-bropbox-center{
   height: 100%;
-  width: calc(100% - (var(--gs-dropbox-left-width) + var(--gs-dropbox-right-width)));
+  width: 100%;
 }
 
 .gs-dropbox-right{

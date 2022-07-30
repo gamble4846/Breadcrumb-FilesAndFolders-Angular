@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './Components/left-menu/left-menu.component';
 import { RightMenuComponent } from './Components/right-menu/right-menu.component';
 import { RightClickMenuComponent } from './Components/right-click-menu/right-click-menu.component';
+import { SearchResultsComponent } from './Components/search-results/search-results.component';
+import { FoldersFilesComponent } from './Components/folders-files/folders-files.component';
 
 registerLocaleData(en);
 
@@ -23,7 +25,9 @@ registerLocaleData(en);
     NavBarComponent,
     LeftMenuComponent,
     RightMenuComponent,
-    RightClickMenuComponent
+    RightClickMenuComponent,
+    SearchResultsComponent,
+    FoldersFilesComponent
   ],
   imports: [
     BrowserModule,

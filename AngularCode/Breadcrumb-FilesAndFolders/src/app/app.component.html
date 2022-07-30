@@ -3,10 +3,13 @@
   <app-nav-bar></app-nav-bar>
   <div class="gs-dropbox-container">
     <app-left-menu></app-left-menu>
-    <router-outlet class="gs-bropbox-center"></router-outlet>
+    <div class="gs-bropbox-center">
+      <router-outlet></router-outlet>
+    </div>
     <app-right-menu></app-right-menu>
   </div>
 </div>
 
 <!-- Modals -->
 <app-right-click-menu></app-right-click-menu>
+<app-search-results></app-search-results>
