@@ -12,4 +12,8 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openFile(){
+    var fileModel:any = document.getElementById("gs-dropbox-file-model");
+    fileModel.classList.add("open");
+  }
 }

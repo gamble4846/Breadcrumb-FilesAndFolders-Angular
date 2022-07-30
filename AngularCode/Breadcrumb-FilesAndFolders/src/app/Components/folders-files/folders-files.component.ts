@@ -86,4 +86,9 @@ export class FoldersFilesComponent implements OnInit {
     dropDown.classList.add("open");
   }
 
+  openFile(){
+    var fileModel:any = document.getElementById("gs-dropbox-file-model");
+    fileModel.classList.add("open");
+  }
+
 }

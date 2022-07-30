@@ -16,6 +16,7 @@ import { RightMenuComponent } from './Components/right-menu/right-menu.component
 import { RightClickMenuComponent } from './Components/right-click-menu/right-click-menu.component';
 import { SearchResultsComponent } from './Components/search-results/search-results.component';
 import { FoldersFilesComponent } from './Components/folders-files/folders-files.component';
+import { FileViewerComponent } from './Components/file-viewer/file-viewer.component';
 
 registerLocaleData(en);
 
@@ -27,7 +28,8 @@ registerLocaleData(en);
     RightMenuComponent,
     RightClickMenuComponent,
     SearchResultsComponent,
-    FoldersFilesComponent
+    FoldersFilesComponent,
+    FileViewerComponent
   ],
   imports: [
     BrowserModule,
