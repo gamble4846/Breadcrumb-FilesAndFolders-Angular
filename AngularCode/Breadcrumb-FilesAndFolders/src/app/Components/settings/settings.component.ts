@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 import { SessionManagementService } from 'src/app/Services/SessionManagement/session-management.service';
 
 @Component({
@@ -12,14 +13,19 @@ export class SettingsComponent implements OnInit {
   settingsForm!: FormGroup;
   DecryptionKeyVisible:any = false;
 
-  constructor(private fb: FormBuilder, private sessionManagement: SessionManagementService) { }
+  constructor(private fb: FormBuilder, private sessionManagement: SessionManagementService, private localBase: LocalBaseService) { }
 
   ngOnInit(): void {
-
     this.settingsForm = this.fb.group({
       ScriptsLink: [this.sessionManagement.GetSettingsFromLocal("ScriptsLink"), []],
-      GoogleAPILink: [this.sessionManagement.GetSettingsFromLocal("GoogleAPILink"), []],
+      GoogleAPIKey: [this.sessionManagement.GetSettingsFromLocal("GoogleAPIKey"), []],
       DecryptionKey: [this.sessionManagement.GetSettingsFromLocal("DecryptionKey"), []],
+    });
+
+    this.localBase.SaveFoldersFilesFromSheetAndSavetoLocalBase().subscribe((response:any) => {
+      if(response == true){
+
+      }
     });
   }
 

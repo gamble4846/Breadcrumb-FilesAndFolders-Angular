@@ -12,10 +12,10 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="GoogleAPILink">Google API Key</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorGoogleAPILink">
-          <input nz-input type="text" formControlName="GoogleAPILink" id="GoogleAPILink" />
-          <ng-template #errorGoogleAPILink let-control>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="GoogleAPIKey">Google API Key</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorGoogleAPIKey">
+          <input nz-input type="text" formControlName="GoogleAPIKey" id="GoogleAPIKey" />
+          <ng-template #errorGoogleAPIKey let-control>
             <!-- <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container> -->
           </ng-template>
         </nz-form-control>
