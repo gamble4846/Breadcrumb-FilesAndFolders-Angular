@@ -4,8 +4,8 @@ import { FoldersFilesComponent } from './Components/folders-files/folders-files.
 import { SettingsComponent } from './Components/settings/settings.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'FoldersFiles' },
-  { path: 'FoldersFiles', component: FoldersFilesComponent},
+  { path: '', pathMatch: 'full', redirectTo: 'FoldersAndFiles' },
+  { path: 'FoldersAndFiles', component: FoldersFilesComponent},
   { path: 'Settings', component: SettingsComponent},
 
 ];

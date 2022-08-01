@@ -640,6 +640,11 @@ body{
   align-items: center;
 }
 
+.fileFolderIcon{
+  width: 30px;
+  height: 30px;
+}
+
 .fileFolderRight{
   display: flex;
   align-items: center;
@@ -818,6 +823,11 @@ body{
 
 .gs-drop-down-for-header-buttons.open{
   display: block;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (max-width: 1050px) {

@@ -1,20 +1,16 @@
 
 <div class="gs-bropbox-center-bread-crumb-and-layout-button-container">
-    <div class="gs-bropbox-center-bread-crumb-container hideBefore600">
-        <ul class="gs-bropbox-center-bread-crumb">
-            <li><span>Folder 1</span></li>
-            <li><span>Folder 2</span></li>
-            <li><span>Folder 3</span></li>
-            <li><span>Folder 4</span></li>
-        </ul>
-    </div>
-    <div class="gs-bread-crumb-alternate hideAfter600">
-        Folder 4
-    </div>
-    <div class="gs-bropbox-center-layout-button-container">
-        <img src="../../../assets/svgs/bars.svg" class="gs-bropbox-center-layout-button-bars">
-        <img src="../../../assets/svgs/downArrow.svg" class="gs-bropbox-center-layout-button-downArrow">
-    </div>
+  <div class="gs-bropbox-center-bread-crumb-container hideBefore600">
+    <ul class="gs-bropbox-center-bread-crumb">
+      <li><span (click)="ShowAllServers()">All Servers</span></li>
+      <li *ngIf="this.ServerIDURL != '' && this.ServerIDURL != null && this.ServerIDURL != undefined"><span (click)="ServerClicked(ServerIDURL)">This Server</span></li>
+      <li *ngIf="CurrentLocationGre4"><span>...</span></li>
+      <li *ngFor="let data of currentLocation"><span (click)="FolderClicked(FoldersFilesObj.ServerId, data.Folder_Id)">{{data.Folder_Name}}</span></li>
+    </ul>
+  </div>
+  <div class="gs-bread-crumb-alternate hideAfter600">
+
+  </div>
 </div>
 <div class="gs-dropbox-center-header-buttons-container">
     <div class="gs-dropbox-center-header-buttons-container-left">
@@ -81,83 +77,83 @@
         <div class="gs-squareButtonGrey">
             <div class="createButtonContent">
                 <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
-                <span class="createButtonContentText">Refresh From Sheet</span>
+                <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
             </div>
         </div>
     </div>
 </div>
 <div class="gs-dropbox-center-folder-files-container">
     <table class="gs-folder-files-table">
-        <thead>
-            <tr>
-                <th width="80%"><div class="eclipsis-div">Name</div></th>
-                <th width="20%" class="hideBefore600"><div class="eclipsis-div">Created</div></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="allowRightClick">
-                <td>
-                    <div class="fileFolderContainer">
-                        <div class="fileFolderLeft">
-                            <div class="fileFolderIconContainer">
-                                <img src="../../../assets/svgs/folder.svg" class="fileFolderIcon">
-                            </div>
-                            <div class="fileFolderName eclipsis-div">
-                                Folder 1
-                            </div>
-                        </div>
-                        <div class="fileFolderRight">
-                            <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
-                            <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
-                        </div>
-                    </div>
-                </td>
-                <td class="hideBefore600">
-                    <div class="eclipsis-div">--</div>
-                </td>
-            </tr>
-            <tr class="allowRightClick">
-                <td>
-                    <div class="fileFolderContainer">
-                        <div class="fileFolderLeft">
-                            <div class="fileFolderIconContainer">
-                                <img src="../../../assets/svgs/folder.svg" class="fileFolderIcon">
-                            </div>
-                            <div class="fileFolderName eclipsis-div">
-                                Folder 2
-                            </div>
-                        </div>
-                        <div class="fileFolderRight">
-                            <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
-                            <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
-                        </div>
-                    </div>
-                </td>
-                <td class="hideBefore600">
-                    <div class="eclipsis-div">--</div>
-                </td>
-            </tr>
-            <tr class="allowRightClick">
-                <td>
-                    <div class="fileFolderContainer">
-                        <div class="fileFolderLeft">
-                            <div class="fileFolderIconContainer">
-                                <img src="../../../assets/svgs/html.svg" class="fileFolderIcon">
-                            </div>
-                            <div class="fileFolderName eclipsis-div" (click)="_cs.openFile()">
-                                File 1.html
-                            </div>
-                        </div>
-                        <div class="fileFolderRight">
-                            <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
-                            <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
-                        </div>
-                    </div>
-                </td>
-                <td class="hideBefore600">
-                    <div class="eclipsis-div">15/10/2021 15:25</div>
-                </td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th width="80%"><div class="eclipsis-div">Name</div></th>
+          <th width="20%" class="hideBefore600"><div class="eclipsis-div">Created</div></th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="onlyServers">
+        <tr *ngFor="let data of ServersList">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC('server')" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div" (click)="ServerClicked(data)">
+                  {{data}}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="hideBefore600">
+              <div class="eclipsis-div">--</div>
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="!onlyServers">
+        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Folders">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC('folder')" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div" (click)="FolderClicked(FoldersFilesObj.ServerId, data.Folder_Id)">
+                  {{data.Folder_Name}}
+                </div>
+              </div>
+              <div class="fileFolderRight">
+                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
+                <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
+              </div>
+            </div>
+          </td>
+          <td class="hideBefore600">
+              <div class="eclipsis-div">--</div>
+          </td>
+        </tr>
+        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC(data.File_Type)" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div" (click)="getFileLinks(data.Files_Id)">
+                  {{data.Files_Name}}
+                </div>
+              </div>
+              <div class="fileFolderRight">
+                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
+                <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
+              </div>
+            </div>
+          </td>
+          <td class="hideBefore600">
+              <div class="eclipsis-div">--</div>
+          </td>
+        </tr>
+      </tbody>
     </table>
 </div>
