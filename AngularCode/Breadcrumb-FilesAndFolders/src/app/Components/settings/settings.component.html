@@ -20,6 +20,20 @@
           </ng-template>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="DecryptionKey">Decryption key</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorDecryptionKey">
+          <nz-input-group [nzSuffix]="suffixDecryptionKey">
+            <input nz-input [type]="DecryptionKeyVisible ? 'text' : 'password'" formControlName="DecryptionKey" id="DecryptionKey" />
+          </nz-input-group>
+          <ng-template #suffixDecryptionKey>
+            <i nz-icon [nzType]="DecryptionKeyVisible ? 'eye-invisible' : 'eye'" (click)="DecryptionKeyVisible = !DecryptionKeyVisible"></i>
+          </ng-template>
+          <ng-template #errorDecryptionKey let-control>
+            <!-- <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container> -->
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item nz-row>
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
           <button nz-button nzType="primary">Save</button>

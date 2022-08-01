@@ -10,6 +10,7 @@ import { SessionManagementService } from 'src/app/Services/SessionManagement/ses
 export class SettingsComponent implements OnInit {
 
   settingsForm!: FormGroup;
+  DecryptionKeyVisible:any = false;
 
   constructor(private fb: FormBuilder, private sessionManagement: SessionManagementService) { }
 
@@ -18,6 +19,7 @@ export class SettingsComponent implements OnInit {
     this.settingsForm = this.fb.group({
       ScriptsLink: [this.sessionManagement.GetSettingsFromLocal("ScriptsLink"), []],
       GoogleAPILink: [this.sessionManagement.GetSettingsFromLocal("GoogleAPILink"), []],
+      DecryptionKey: [this.sessionManagement.GetSettingsFromLocal("DecryptionKey"), []],
     });
   }
 
