@@ -38,6 +38,11 @@ body{
   margin: 0;
 }
 
+.refreshIconCenterDrop{
+  height: 20px;
+  width: 20px;
+}
+
 .gs-dropbox-main-container{
   height: 100vh;
   max-width: 100%;
