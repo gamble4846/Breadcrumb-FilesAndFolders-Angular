@@ -1,0 +1,30 @@
+<div class="settings-container">
+  <h1>Settings</h1>
+  <div class="settings-form-container">
+    <form nz-form [formGroup]="settingsForm" (ngSubmit)="submitSettingsForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ScriptsLink">Google App Scripts Link</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorScriptsLink">
+          <input nz-input type="text" formControlName="ScriptsLink" id="ScriptsLink" />
+          <ng-template #errorScriptsLink let-control>
+            <!-- <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container> -->
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="GoogleAPILink">Google API Key</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorGoogleAPILink">
+          <input nz-input type="text" formControlName="GoogleAPILink" id="GoogleAPILink" />
+          <ng-template #errorGoogleAPILink let-control>
+            <!-- <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container> -->
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">Save</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

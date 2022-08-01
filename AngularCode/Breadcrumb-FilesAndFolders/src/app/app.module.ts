@@ -8,7 +8,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeftMenuComponent } from './Components/left-menu/left-menu.component';
@@ -17,6 +17,14 @@ import { RightClickMenuComponent } from './Components/right-click-menu/right-cli
 import { SearchResultsComponent } from './Components/search-results/search-results.component';
 import { FoldersFilesComponent } from './Components/folders-files/folders-files.component';
 import { FileViewerComponent } from './Components/file-viewer/file-viewer.component';
+import { SettingsComponent } from './Components/settings/settings.component';
+
+
+//-------------------------------------- NG ZORRO ----------------------------------------------
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+//----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
 
@@ -29,14 +37,19 @@ registerLocaleData(en);
     RightClickMenuComponent,
     SearchResultsComponent,
     FoldersFilesComponent,
-    FileViewerComponent
+    FileViewerComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
