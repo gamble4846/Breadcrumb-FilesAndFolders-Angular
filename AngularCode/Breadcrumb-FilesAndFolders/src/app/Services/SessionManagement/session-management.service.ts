@@ -12,13 +12,18 @@ export class SessionManagementService {
   }
 
   GetSettingsFromLocal(propertyName:any){
-    var jsonString:any = localStorage.getItem("settingsData");
-    var json:any = JSON.parse(jsonString);
+    try{
+      var jsonString:any = localStorage.getItem("settingsData");
+      var json:any = JSON.parse(jsonString);
 
-    if(json[propertyName]){
-      return json[propertyName];
+      if(json[propertyName]){
+        return json[propertyName];
+      }
+
+      return "";
     }
-
-    return null;
+    catch(ex){
+      return "";
+    }
   }
 }

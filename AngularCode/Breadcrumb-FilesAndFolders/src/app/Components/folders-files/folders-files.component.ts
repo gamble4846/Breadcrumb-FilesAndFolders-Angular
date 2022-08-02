@@ -27,7 +27,7 @@ export class FoldersFilesComponent implements OnInit {
   OpenedFileLinks:any = [];
   CurrentLink:any = {};
   OpenedGoogleDriveFileEmbbedLink:any = "";
-  CurrentLocationGre4:any = false;
+  CurrentLocationGre4:boolean = false;
 
   constructor(public _cs : CommonServicesService, private route: ActivatedRoute, private router:Router, private LocalBase:LocalBaseService) { }
 
@@ -46,17 +46,23 @@ export class FoldersFilesComponent implements OnInit {
         }
     }
 
-    var uploadButton:any = document.getElementById("gs-squareButtonUpload");
-    var uploadDropDown:any = document.getElementById("gs-drop-down-for-upload-button");
-    if(!uploadButton.contains(event.target)){
+    try{
+      var uploadButton:any = document.getElementById("gs-squareButtonUpload");
+      var uploadDropDown:any = document.getElementById("gs-drop-down-for-upload-button");
+      if(!uploadButton.contains(event.target)){
         uploadDropDown.classList.remove("open");
     }
-
-    var createButton:any = document.getElementById("gs-squareButtonCreate");
-    var createDropDown:any = document.getElementById("gs-drop-down-for-create-button");
-    if(!createButton.contains(event.target)){
-        createDropDown.classList.remove("open");
     }
+    catch(ex){}
+
+    try{
+      var createButton:any = document.getElementById("gs-squareButtonCreate");
+      var createDropDown:any = document.getElementById("gs-drop-down-for-create-button");
+      if(!createButton.contains(event.target)){
+          createDropDown.classList.remove("open");
+      }
+    }
+    catch(ex){}
   }
 
   showRightClickMenu(event:any){
@@ -103,7 +109,6 @@ export class FoldersFilesComponent implements OnInit {
 
   StartUpFun(){
     var rightClickElements = document.getElementsByClassName("allowRightClick");
-    console.log(rightClickElements);
     for (let index = 0; index < rightClickElements.length; index++) {
         const rightClickElement = rightClickElements[index];
         rightClickElement.addEventListener("contextmenu", this.showRightClickMenu);
@@ -159,16 +164,14 @@ export class FoldersFilesComponent implements OnInit {
           );
         }
         this.currentLocation.reverse();
-        this.CurrentLocationGre4 = false;
         if(this.currentLocation.length > 4){
-          let tempLocation:any = [];
-          tempLocation.push(this.currentLocation[this.currentLocation.length - 3]);
-          tempLocation.push(this.currentLocation[this.currentLocation.length - 2]);
-          tempLocation.push(this.currentLocation[this.currentLocation.length - 1]);
-          tempLocation.push(this.currentLocation[this.currentLocation.length]);
-          this.currentLocation = tempLocation;
           this.CurrentLocationGre4 = true;
         }
+        else{
+          this.CurrentLocationGre4 = false;
+        }
+        this.currentLocation = this.currentLocation.slice(Math.max(this.currentLocation.length - 4, 1));
+        console.log(this.currentLocation);
       });
     }
   }
@@ -222,7 +225,6 @@ export class FoldersFilesComponent implements OnInit {
   }
 
   GetIconSRC(iconName:string){
-    console.log(iconName);
     return this._cs.GetIconSRC(iconName);
   }
 

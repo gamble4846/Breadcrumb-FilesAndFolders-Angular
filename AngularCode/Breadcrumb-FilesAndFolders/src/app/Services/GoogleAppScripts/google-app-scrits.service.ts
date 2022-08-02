@@ -10,6 +10,9 @@ export class GoogleAppScritsService {
 
   constructor(private sessionManagement: SessionManagementService, private http: HttpClient) {
     this.apiLink = this.sessionManagement.GetSettingsFromLocal("ScriptsLink");
+    if(!this.apiLink){
+      this.apiLink = "";
+    }
   }
 
   getOptions(){
