@@ -1,23 +1,23 @@
 <div class="gs-dropbox-file-model" id="gs-dropbox-file-model">
   <div class="gs-dropbox-file-model-header">
-      <div class="gs-dropbox-file-model-header-file-name">File 1.html</div>
-      <div class="gs-dropbox-file-model-header-close-button" (click)="closeFile()"><img src="../../../assets/svgs/cancel.svg"></div>
+      <div class="gs-dropbox-file-model-header-file-name" id="fileModelFileName">File 1.html</div>
+      <div class="gs-dropbox-file-model-header-close-button" (click)="closeFile()"><img src="../../../Breadcrumb-FilesAndFolders-Release/assets/svgs/cancel.svg"></div>
   </div>
   <div class="gs-dropbox-file-model-content">
       <div class="gs-dropbox-file-model-content-google-drive-embbed">
-          <iframe src="https://drive.google.com/file/d/1vqEK_6zfpFHnZuXMJ-Z1lt7SXrELwqTQ/preview" allow="autoplay"></iframe>
+          <iframe id="openedFileIFrame" src="" allow="autoplay"></iframe>
       </div>
   </div>
   <div class="gs-dropbox-file-model-footer">
-      <div class="gs-squareButtonNextPrevious">
+      <!-- <div class="gs-squareButtonNextPrevious">
           <div class="NextPreviousButtonContent">
-              <span class="NextPreviousButtonContentText">Previous</span>
+              <span class="NextPreviousButtonContentText" id="NextButtonFile">Previous</span>
           </div>
       </div>
       <div class="gs-squareButtonNextPrevious">
           <div class="NextPreviousButtonContent">
-              <span class="NextPreviousButtonContentText">Next</span>
+              <span class="NextPreviousButtonContentText" id="PreviousButtonFile">Next</span>
           </div>
-      </div>
+      </div> -->
   </div>
 </div>

@@ -8,7 +8,9 @@
     </ul>
   </div>
   <div class="gs-bread-crumb-alternate hideAfter600">
-
+    <span *ngIf="ServerIDURL == '' || ServerIDURL == null || ServerIDURL == undefined">All Servers</span>
+    <span *ngIf="ServerIDURL != '' && ServerIDURL != null && ServerIDURL != undefined && currentLocation.length == 0">This Server</span>
+    <span *ngIf="currentLocation.length > 0">{{currentLocation[currentLocation.length - 1].Folder_Name}}</span>
   </div>
 </div>
 
@@ -16,6 +18,7 @@
     <div class="gs-dropbox-center-header-buttons-container-left">
         <div class="gs-squareButtonBlue" (click)="showUploadDropDown()" id="gs-squareButtonUpload">
             <div class="uploadButtonContent">
+                <!-- ../../../Breadcrumb-FilesAndFolders-Release/assets/ -->
                 <img src="../../../assets/svgs/closepanel.svg" class="uploadButtonContentUploadIcon hideBefore600">
                 <span class="uploadButtonContentText">Upload</span>
                 <img src="../../../assets/svgs/downArrow.svg" class="uploadButtonContentDownArrow">
@@ -93,7 +96,7 @@
       </thead>
 
       <tbody *ngIf="onlyServers">
-        <tr *ngFor="let data of ServersList">
+        <tr *ngFor="let data of ServersList" class="allowRightClick">
           <td>
             <div class="fileFolderContainer">
               <div class="fileFolderLeft">
@@ -113,7 +116,7 @@
       </tbody>
 
       <tbody *ngIf="!onlyServers">
-        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Folders">
+        <tr *ngFor="let data of FoldersFilesObj.Folders" (contextmenu)="showRightClickMenu($event)">
           <td>
             <div class="fileFolderContainer">
               <div class="fileFolderLeft">
@@ -134,14 +137,14 @@
               <div class="eclipsis-div">--</div>
           </td>
         </tr>
-        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files">
+        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files" (contextmenu)="showRightClickMenu($event)">
           <td>
             <div class="fileFolderContainer">
               <div class="fileFolderLeft">
                 <div class="fileFolderIconContainer">
                   <img [src]="GetIconSRC(data.File_Type)" class="fileFolderIcon">
                 </div>
-                <div class="fileFolderName eclipsis-div" (click)="getFileLinks(data.Files_Id)">
+                <div class="fileFolderName eclipsis-div" (click)="getFileLinks(data)">
                   {{data.Files_Name}}
                 </div>
               </div>

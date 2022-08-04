@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
 import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
@@ -107,14 +108,22 @@ export class FoldersFilesComponent implements OnInit {
     dropDown.classList.add("open");
   }
 
-  StartUpFun(){
+  setUpRightClickEvents(){
+
+  }
+
+  updateRightClickEvent(){
     var rightClickElements = document.getElementsByClassName("allowRightClick");
     for (let index = 0; index < rightClickElements.length; index++) {
-        const rightClickElement = rightClickElements[index];
-        rightClickElement.addEventListener("contextmenu", this.showRightClickMenu);
+      const rightClickElement = rightClickElements[index];
+      rightClickElement.addEventListener("contextmenu", this.showRightClickMenu);
     }
+  }
 
+  StartUpFun(){
     document.addEventListener("click", this.fullDocumentClick);
+    // document.getElementById("NextButtonFile")?.addEventListener("click", this.NextFile);
+    // document.getElementById("PreviousButtonFile")?.addEventListener("click", this.PreviousFile);
 
     this.route.queryParams.subscribe(params => {
       this.ServerIDURL = params['ServerId'];
@@ -129,6 +138,8 @@ export class FoldersFilesComponent implements OnInit {
         this.onlyServers = false;
       }
     });
+
+    this.updateRightClickEvent();
   }
 
   ShowAllServers(){
@@ -164,14 +175,13 @@ export class FoldersFilesComponent implements OnInit {
           );
         }
         this.currentLocation.reverse();
-        if(this.currentLocation.length > 4){
-          this.CurrentLocationGre4 = true;
-        }
-        else{
-          this.CurrentLocationGre4 = false;
-        }
-        this.currentLocation = this.currentLocation.slice(Math.max(this.currentLocation.length - 4, 1));
-        console.log(this.currentLocation);
+        // if(this.currentLocation.length > 4){
+        //   this.CurrentLocationGre4 = true;
+        // }
+        // else{
+        //   this.CurrentLocationGre4 = false;
+        // }
+        //this.currentLocation = this.currentLocation.slice(Math.max(this.currentLocation.length - 4, 1));
       });
     }
   }
@@ -207,11 +217,10 @@ export class FoldersFilesComponent implements OnInit {
   }
 
   OpenFile(fileLinks:any, file:any){
-    this._cs.openFile();
     this.OpenedFile = file;
     this.OpenedFileLinks = fileLinks;
     if(this.OpenedFileLinks.length > 0){
-      this.OpenLink(this.OpenedFileLinks[0]);
+      this.OpenLink(this.OpenedFileLinks[0], file);
     }
   }
 
@@ -219,30 +228,34 @@ export class FoldersFilesComponent implements OnInit {
     this.fileOpened = false;
   }
 
-  OpenLink(data:any){
+  OpenLink(data:any, file:any){
     this.CurrentLink = data;
     this.OpenedGoogleDriveFileEmbbedLink = "https://drive.google.com/file/d/" + this.CurrentLink.Link_link.split("/")[5] + "/preview";
+    document.getElementById("openedFileIFrame")?.setAttribute("src", this.OpenedGoogleDriveFileEmbbedLink);
+    var x:any = document.getElementById("fileModelFileName");
+    x.innerHTML = file.Files_Name;
+    this._cs.openFile();
   }
 
   GetIconSRC(iconName:string){
     return this._cs.GetIconSRC(iconName);
   }
 
-  PreviousFile(fileId:any){
-    let files = this.FoldersFilesObj.Files;
-    let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
-    if(currentIndex != 0 && currentIndex != -1){
-      this.getFileLinks(files[currentIndex-1]);
-    }
-    console.log(this.OpenedFile);
-  }
+  // PreviousFile(fileId:any){
+  //   console.log("PreviousFile");
+  //   let files = this.FoldersFilesObj.Files;
+  //   let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
+  //   if(currentIndex != 0 && currentIndex != -1){
+  //     this.getFileLinks(files[currentIndex-1]);
+  //   }
+  // }
 
-  NextFile(fileId:any){
-    let files = this.FoldersFilesObj.Files;
-    let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
-    if(currentIndex < files.length && currentIndex != -1){
-      this.getFileLinks(files[currentIndex+1]);
-    }
-    console.log(this.OpenedFile);
-  }
+  // NextFile(fileId:any){
+  //   console.log("NextFile");
+  //   let files = this.FoldersFilesObj.Files;
+  //   let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
+  //   if(currentIndex < files.length && currentIndex != -1){
+  //     this.getFileLinks(files[currentIndex+1]);
+  //   }
+  // }
 }
