@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class CommonServicesService {
 
+  public static FoldersFilesObj:any = null;
+
   constructor() { }
 
   openFile(){

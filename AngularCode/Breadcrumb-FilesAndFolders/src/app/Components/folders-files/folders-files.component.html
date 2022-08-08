@@ -18,7 +18,7 @@
     <div class="gs-dropbox-center-header-buttons-container-left">
         <div class="gs-squareButtonBlue" (click)="showUploadDropDown()" id="gs-squareButtonUpload">
             <div class="uploadButtonContent">
-                <!-- ../../../Breadcrumb-FilesAndFolders-Release/assets/ -->
+                <!-- ../../../Breadcrumb-FilesAndFolders-Angular/assets/ -->
                 <img src="../../../assets/svgs/closepanel.svg" class="uploadButtonContentUploadIcon hideBefore600">
                 <span class="uploadButtonContentText">Upload</span>
                 <img src="../../../assets/svgs/downArrow.svg" class="uploadButtonContentDownArrow">
@@ -161,3 +161,6 @@
       </tbody>
     </table>
 </div>
+
+<button class="gs-d-none" id="NextFileHiddenBTN" (click)="NextFile($event)">Next</button>
+<button class="gs-d-none" id="PreviousFileHiddenBTN" (click)="PreviousFile($event)">Previous</button>

@@ -122,8 +122,9 @@ export class FoldersFilesComponent implements OnInit {
 
   StartUpFun(){
     document.addEventListener("click", this.fullDocumentClick);
-    // document.getElementById("NextButtonFile")?.addEventListener("click", this.NextFile);
-    // document.getElementById("PreviousButtonFile")?.addEventListener("click", this.PreviousFile);
+
+    document.getElementById("NextButtonFile")?.addEventListener("click", this.NextFile_);
+    document.getElementById("PreviousButtonFile")?.addEventListener("click", this.PreviousFile_);
 
     this.route.queryParams.subscribe(params => {
       this.ServerIDURL = params['ServerId'];
@@ -140,6 +141,14 @@ export class FoldersFilesComponent implements OnInit {
     });
 
     this.updateRightClickEvent();
+  }
+
+  NextFile_(){
+    document.getElementById("NextFileHiddenBTN")?.click();
+  }
+
+  PreviousFile_(){
+    document.getElementById("PreviousFileHiddenBTN")?.click();
   }
 
   ShowAllServers(){
@@ -175,13 +184,6 @@ export class FoldersFilesComponent implements OnInit {
           );
         }
         this.currentLocation.reverse();
-        // if(this.currentLocation.length > 4){
-        //   this.CurrentLocationGre4 = true;
-        // }
-        // else{
-        //   this.CurrentLocationGre4 = false;
-        // }
-        //this.currentLocation = this.currentLocation.slice(Math.max(this.currentLocation.length - 4, 1));
       });
     }
   }
@@ -196,6 +198,7 @@ export class FoldersFilesComponent implements OnInit {
   getFoldersFiles(){
     this.LocalBase.GetFoldersFilesByUpperFolderID(this.UpperFolderIDURL,this.ServerIDURL).subscribe((response:any) => {
       this.FoldersFilesObj = response;
+      CommonServicesService.FoldersFilesObj = this.FoldersFilesObj;
       this.finalTableData = this.FoldersFilesObj;
       this.getCurrentLocation();
     });
@@ -232,6 +235,7 @@ export class FoldersFilesComponent implements OnInit {
     this.CurrentLink = data;
     this.OpenedGoogleDriveFileEmbbedLink = "https://drive.google.com/file/d/" + this.CurrentLink.Link_link.split("/")[5] + "/preview";
     document.getElementById("openedFileIFrame")?.setAttribute("src", this.OpenedGoogleDriveFileEmbbedLink);
+    document.getElementById("gs-dropbox-file-model")?.setAttribute("data-file-id", file.Files_Id);
     var x:any = document.getElementById("fileModelFileName");
     x.innerHTML = file.Files_Name;
     this._cs.openFile();
@@ -241,21 +245,23 @@ export class FoldersFilesComponent implements OnInit {
     return this._cs.GetIconSRC(iconName);
   }
 
-  // PreviousFile(fileId:any){
-  //   console.log("PreviousFile");
-  //   let files = this.FoldersFilesObj.Files;
-  //   let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
-  //   if(currentIndex != 0 && currentIndex != -1){
-  //     this.getFileLinks(files[currentIndex-1]);
-  //   }
-  // }
+  PreviousFile(event:any){
+    let fileId = document.getElementById("gs-dropbox-file-model")?.getAttribute("data-file-id");
+    let FoldersFilesObj = CommonServicesService.FoldersFilesObj;
+    let files = FoldersFilesObj.Files;
+    let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
+    if(currentIndex != 0 && currentIndex != -1){
+      this.getFileLinks(files[currentIndex-1]);
+    }
+  }
 
-  // NextFile(fileId:any){
-  //   console.log("NextFile");
-  //   let files = this.FoldersFilesObj.Files;
-  //   let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
-  //   if(currentIndex < files.length && currentIndex != -1){
-  //     this.getFileLinks(files[currentIndex+1]);
-  //   }
-  // }
+  NextFile(event:any){
+    let fileId = document.getElementById("gs-dropbox-file-model")?.getAttribute("data-file-id");
+    let FoldersFilesObj = CommonServicesService.FoldersFilesObj;
+    let files = FoldersFilesObj.Files;
+    let currentIndex = files.findIndex((x:any) => x.Files_Id == fileId);
+    if(currentIndex < files.length && currentIndex != -1){
+      this.getFileLinks(files[currentIndex+1]);
+    }
+  }
 }
