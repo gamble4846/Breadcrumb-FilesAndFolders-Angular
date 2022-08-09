@@ -234,13 +234,19 @@ export class FoldersFilesComponent implements OnInit {
   OpenLink(data:any, file:any){
     this.CurrentLink = data;
     this.OpenedGoogleDriveFileEmbbedLink = "https://drive.google.com/file/d/" + this.CurrentLink.Link_link.split("/")[5] + "/preview";
-    document.getElementById("openedFileIFrame")?.setAttribute("src", this.OpenedGoogleDriveFileEmbbedLink);
+    // document.getElementById("openedFileIFrame")?.setAttribute("src", this.OpenedGoogleDriveFileEmbbedLink);
+    let openFileIframe = document.getElementById("openedFileIFrame");
+    var openFileIframeParent = openFileIframe?.parentElement;
+
+    openFileIframe?.remove();
+    openFileIframe?.setAttribute('src', this.OpenedGoogleDriveFileEmbbedLink);
+    openFileIframeParent?.append(openFileIframe!);
+
     document.getElementById("gs-dropbox-file-model")?.setAttribute("data-file-id", file.Files_Id);
     var x:any = document.getElementById("fileModelFileName");
     x.innerHTML = file.Files_Name;
     this._cs.openFile();
   }
-
   GetIconSRC(iconName:string){
     return this._cs.GetIconSRC(iconName);
   }
