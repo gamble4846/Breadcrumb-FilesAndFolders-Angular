@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
+import { CustomNotificationService } from '../CustomNotification/custom-notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionManagementService {
 
-  constructor() { }
+  constructor(private customNotificationService: CustomNotificationService) { }
 
   SaveToSettingsLocal(jsonString:any){
     localStorage.setItem("settingsData", jsonString);
+    this.customNotificationService.SmallMessage("success","Settings Saved");
   }
 
   GetSettingsFromLocal(propertyName:any){

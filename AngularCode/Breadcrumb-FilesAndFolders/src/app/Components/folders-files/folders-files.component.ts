@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
+import { CustomNotificationService } from 'src/app/Services/CustomNotification/custom-notification.service';
 import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class FoldersFilesComponent implements OnInit {
   OpenedGoogleDriveFileEmbbedLink:any = "";
   CurrentLocationGre4:boolean = false;
 
-  constructor(public _cs : CommonServicesService, private route: ActivatedRoute, private router:Router, private LocalBase:LocalBaseService) { }
+  constructor(private customNotificationService: CustomNotificationService,public _cs : CommonServicesService, private route: ActivatedRoute, private router:Router, private LocalBase:LocalBaseService) { }
 
   ngOnInit(): void {
     this.StartUpFun();
@@ -205,8 +206,10 @@ export class FoldersFilesComponent implements OnInit {
   }
 
   refreshFilesAndFolders(){
+    this.customNotificationService.SmallMessage("info","Refreshing Data From Sheets");
     this.LocalBase.SaveFoldersFilesFromSheetAndSavetoLocalBase().subscribe((response:any) => {
       if(response == true){
+        this.customNotificationService.SmallMessage("success","Data Updated from Sheets");
         this.StartUpFun();
       }
     });

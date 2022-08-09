@@ -70,13 +70,13 @@
             </div>
             <div class="gs-drop-down-for-header-buttons" id="gs-drop-down-for-create-button">
                 <div class="gs-drop-box-right-click-menu-section">
-                  <div class="gs-drop-box-right-click-menu-button hideAfter600">
+                  <div class="gs-drop-box-right-click-menu-button hideAfter600" (click)="refreshFilesAndFolders()">
                     <div class="gs-drop-box-right-click-menu-button-left">
                       <div class="gs-drop-box-right-click-menu-button-left-icon">
                         <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
                       </div>
                       <div class="gs-drop-box-right-click-menu-button-left-text">
-                        <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
+                        <span class="createButtonContentText">Refresh From Sheet</span>
                       </div>
                     </div>
                   </div>
@@ -85,10 +85,10 @@
         </div>
     </div>
     <div class="gs-dropbox-center-header-buttons-container-right hideBefore600">
-      <div class="gs-squareButtonGrey">
+      <div class="gs-squareButtonGrey" (click)="refreshFilesAndFolders()">
         <div class="createButtonContent">
           <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
-          <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
+          <span class="createButtonContentText">Refresh From Sheet</span>
         </div>
       </div>
     </div>

@@ -27,6 +27,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CreateFolderModalComponent } from './Components/create-folder-modal/create-folder-modal.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -55,7 +57,9 @@ registerLocaleData(en);
     NzButtonModule,
     ReactiveFormsModule,
     NzIconModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzMessageModule,
+    NzNotificationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
