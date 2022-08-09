@@ -264,4 +264,17 @@ export class FoldersFilesComponent implements OnInit {
       this.getFileLinks(files[currentIndex+1]);
     }
   }
+
+  backOneFolder(){
+    if(this.UpperFolderIDURL == "-"){
+      this.ShowAllServers();
+    }
+    else{
+      this.LocalBase.GetUpperFolderIdFromFolderIdAndServerId(this.UpperFolderIDURL,this.ServerIDURL).subscribe((response:any) => {
+        if(response != -1){
+          this.FolderClicked(this.ServerIDURL, response);
+        }
+      });
+    }
+  }
 }

@@ -103,5 +103,21 @@ export class LocalBaseService {
 
     return finalData;
   }
+
+  GetUpperFolderIdFromFolderIdAndServerId(folderId:any, serverId:any){
+    let finalData = new Observable((observer:any) => {
+      this.GetAllFodlersByServerID(serverId).subscribe((response:any) => {
+        try{
+          observer.next(response.find((x:any) => x.Folder_Id == folderId).Folder_UpperFolderId);
+          observer.complete();
+        }
+        catch(ex){
+          observer.next(-1);
+          observer.complete();
+        }
+      });
+    })
+    return finalData;
+  }
   // --------------------------------------------------------------------------------------------
 }

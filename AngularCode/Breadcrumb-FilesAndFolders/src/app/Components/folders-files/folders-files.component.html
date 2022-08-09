@@ -16,73 +16,81 @@
 
 <div class="gs-dropbox-center-header-buttons-container">
     <div class="gs-dropbox-center-header-buttons-container-left">
+        <div class="gs-squareButtonGrey padding-5x-imp" (click)="backOneFolder()">
+          <div class="createButtonContent">
+            <img src="../../../assets/svgs/backButton.svg">
+          </div>
+        </div>
         <div class="gs-squareButtonBlue" (click)="showUploadDropDown()" id="gs-squareButtonUpload">
             <div class="uploadButtonContent">
-                <!-- ../../../Breadcrumb-FilesAndFolders-Angular/assets/ -->
-                <img src="../../../assets/svgs/closepanel.svg" class="uploadButtonContentUploadIcon hideBefore600">
-                <span class="uploadButtonContentText">Upload</span>
-                <img src="../../../assets/svgs/downArrow.svg" class="uploadButtonContentDownArrow">
+              <!-- ../../../Breadcrumb-FilesAndFolders-Angular/assets/ -->
+              <img src="../../../assets/svgs/plus.svg" class="uploadButtonContentUploadIcon hideBefore600">
+              <span class="uploadButtonContentText">Create</span>
+              <img src="../../../assets/svgs/downArrow.svg" class="uploadButtonContentDownArrow">
             </div>
             <div class="gs-drop-down-for-header-buttons" id="gs-drop-down-for-upload-button">
-                <div class="gs-drop-box-right-click-menu-section">
-                    <div class="gs-drop-box-right-click-menu-button">
-                        <div class="gs-drop-box-right-click-menu-button-left">
-                            <div class="gs-drop-box-right-click-menu-button-left-icon">
-                                <img src="../../../assets/svgs/fileUpload.svg">
-                            </div>
-                            <div class="gs-drop-box-right-click-menu-button-left-text">
-                                Files
-                            </div>
-                        </div>
+              <div class="gs-drop-box-right-click-menu-section">
+                <div class="gs-drop-box-right-click-menu-button">
+                  <div class="gs-drop-box-right-click-menu-button-left">
+                    <div class="gs-drop-box-right-click-menu-button-left-icon">
+                      <img src="../../../assets/svgs/fileUpload.svg">
                     </div>
-                    <div class="gs-drop-box-right-click-menu-button">
-                        <div class="gs-drop-box-right-click-menu-button-left">
-                            <div class="gs-drop-box-right-click-menu-button-left-icon">
-                                <img src="../../../assets/svgs/folderUpload.svg">
-                            </div>
-                            <div class="gs-drop-box-right-click-menu-button-left-text">
-                                Folders
-                            </div>
-                        </div>
+                    <div class="gs-drop-box-right-click-menu-button-left-text">
+                      File
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="gs-squareButtonGrey" (click)="showCreateDropDown()" id="gs-squareButtonCreate">
-            <div class="createButtonContent">
-                <img src="../../../assets/svgs/plus.svg" class="createButtonContentUploadIcon hideBefore600">
-                <span class="createButtonContentText">Create</span>
-                <img src="../../../assets/svgs/downArrow.svg" class="createButtonContentDownArrow">
-            </div>
-            <div class="gs-drop-down-for-header-buttons" id="gs-drop-down-for-create-button">
-                <div class="gs-drop-box-right-click-menu-section">
-                    <div class="gs-drop-box-right-click-menu-button">
-                        <div class="gs-drop-box-right-click-menu-button-left">
-                            <div class="gs-drop-box-right-click-menu-button-left-icon">
-                                <img src="../../../assets/svgs/normalFolder.svg">
-                            </div>
-                            <div class="gs-drop-box-right-click-menu-button-left-text">
-                                Folder
-                            </div>
-                        </div>
+                <div class="gs-drop-box-right-click-menu-button">
+                  <div class="gs-drop-box-right-click-menu-button-left">
+                    <div class="gs-drop-box-right-click-menu-button-left-icon">
+                      <img src="../../../assets/svgs/fileUpload.svg">
                     </div>
+                    <div class="gs-drop-box-right-click-menu-button-left-text">
+                      Google Drive Files
+                    </div>
+                  </div>
                 </div>
+                <div class="gs-drop-box-right-click-menu-button">
+                  <div class="gs-drop-box-right-click-menu-button-left">
+                    <div class="gs-drop-box-right-click-menu-button-left-icon">
+                      <img src="../../../assets/svgs/folderUpload.svg">
+                    </div>
+                    <div class="gs-drop-box-right-click-menu-button-left-text">
+                      Folder
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
         <div class="OnePXBarVerticle"></div>
-        <div class="gs-squareButtonGrey padding-5x-imp">
+        <div class="gs-squareButtonGrey" (click)="showCreateDropDown()" id="gs-squareButtonCreate">
             <div class="createButtonContent">
-                <img src="../../../assets/svgs/tripleDot.svg">
+              <img src="../../../assets/svgs/tripleDot.svg">
+            </div>
+            <div class="gs-drop-down-for-header-buttons" id="gs-drop-down-for-create-button">
+                <div class="gs-drop-box-right-click-menu-section">
+                  <div class="gs-drop-box-right-click-menu-button hideAfter600">
+                    <div class="gs-drop-box-right-click-menu-button-left">
+                      <div class="gs-drop-box-right-click-menu-button-left-icon">
+                        <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
+                      </div>
+                      <div class="gs-drop-box-right-click-menu-button-left-text">
+                        <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="gs-dropbox-center-header-buttons-container-right hideBefore600">
-        <div class="gs-squareButtonGrey">
-            <div class="createButtonContent">
-                <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
-                <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
-            </div>
+      <div class="gs-squareButtonGrey">
+        <div class="createButtonContent">
+          <img src="../../../assets/svgs/refresh.svg" class="refreshIconCenterDrop">
+          <span class="createButtonContentText" (click)="refreshFilesAndFolders()">Refresh From Sheet</span>
         </div>
+      </div>
     </div>
 </div>
 
