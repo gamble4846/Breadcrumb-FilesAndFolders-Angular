@@ -247,6 +247,7 @@ export class FoldersFilesComponent implements OnInit {
     x.innerHTML = file.Files_Name;
     this._cs.openFile();
   }
+
   GetIconSRC(iconName:string){
     return this._cs.GetIconSRC(iconName);
   }
@@ -282,5 +283,9 @@ export class FoldersFilesComponent implements OnInit {
         }
       });
     }
+  }
+
+  CreateFolderClicked(){
+    document.getElementById("create-folder-modal")?.classList.add("open");
   }
 }

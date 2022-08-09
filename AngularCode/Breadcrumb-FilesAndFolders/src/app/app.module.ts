@@ -25,6 +25,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CreateFolderModalComponent } from './Components/create-folder-modal/create-folder-modal.component';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -39,7 +41,8 @@ registerLocaleData(en);
     SearchResultsComponent,
     FoldersFilesComponent,
     FileViewerComponent,
-    SettingsComponent
+    SettingsComponent,
+    CreateFolderModalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ registerLocaleData(en);
     NzInputModule,
     NzButtonModule,
     ReactiveFormsModule,
-    NzIconModule
+    NzIconModule,
+    NzSwitchModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

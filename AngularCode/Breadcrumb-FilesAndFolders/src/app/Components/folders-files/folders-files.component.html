@@ -50,7 +50,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="gs-drop-box-right-click-menu-button">
+                <div class="gs-drop-box-right-click-menu-button" (click)="CreateFolderClicked()">
                   <div class="gs-drop-box-right-click-menu-button-left">
                     <div class="gs-drop-box-right-click-menu-button-left-icon">
                       <img src="../../../assets/svgs/folderUpload.svg">
@@ -172,3 +172,5 @@
 
 <button class="gs-d-none" id="NextFileHiddenBTN" (click)="NextFile($event)">Next</button>
 <button class="gs-d-none" id="PreviousFileHiddenBTN" (click)="PreviousFile($event)">Previous</button>
+<button class="gs-d-none" id="refreshFilesAndFoldersHiddenBTN" (click)="refreshFilesAndFolders()">refreshFilesAndFolders</button>
+<button class="gs-d-none" id="refreshFilesAndFoldersOnlyLocalHiddenBTN" (click)="getFoldersFiles()">refreshFilesAndFoldersOnlyLocal</button>

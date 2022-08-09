@@ -119,5 +119,44 @@ export class LocalBaseService {
     })
     return finalData;
   }
+
+  ReplaceDataInLocal(dataToAdd:any){
+    let finalData = new Observable((observer:any) => {
+      try{
+        this.db.collection('FoldersAndFiles').delete().then((resultLBDEL:any) => {
+          this.db.collection('FoldersAndFiles').add(dataToAdd).then((resultLBADD:any) => {
+            observer.next(true);
+            observer.complete();
+          });
+        });
+      }
+      catch(ex){
+        observer.next(false);
+        observer.complete();
+      }
+    });
+    return finalData;
+  }
+
+  AddFolderToLocalBase(folder:any,serverId:any){
+    let finalData = new Observable((observer:any) => {
+      try{
+        this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+          let localData = resultGET;
+          localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Folders.push(folder);
+          console.log(localData);
+          this.ReplaceDataInLocal(localData[0]).subscribe((res:any) => {
+            observer.next(true);
+            observer.complete();
+          });
+        })
+      }
+      catch(ex){
+        observer.next(false);
+        observer.complete();
+      }
+    })
+    return finalData;
+  }
   // --------------------------------------------------------------------------------------------
 }
