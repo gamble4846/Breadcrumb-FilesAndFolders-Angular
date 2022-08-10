@@ -44,4 +44,16 @@ export class GoogleAppScritsService {
     };
     return this.http.post(this.apiLink, body, this.getOptions());
   }
+
+  PutStar(values:any){
+    var body = {
+      "method": "PUT",
+      "Action": "UPDATESTAR",
+      "Server_ID": values.Server_ID.toString(),
+      "Prime_ID": values.Prime_ID.toString(),
+      "Is_Stared": values.Is_Stared.toString(),
+      "Is_Folder": values.Is_Folder.toString()
+    }
+    return this.http.post(this.apiLink, body, this.getOptions());
+  }
 }

@@ -144,7 +144,48 @@ export class LocalBaseService {
         this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
           let localData = resultGET;
           localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Folders.push(folder);
-          console.log(localData);
+          this.ReplaceDataInLocal(localData[0]).subscribe((res:any) => {
+            observer.next(true);
+            observer.complete();
+          });
+        })
+      }
+      catch(ex){
+        observer.next(false);
+        observer.complete();
+      }
+    })
+    return finalData;
+  }
+
+  UpdateFolderToLocalBase(folder:any, serverId:any){
+    let finalData = new Observable((observer:any) => {
+      try{
+        this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+          let localData = resultGET;
+          let foundIndex = localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Folders.findIndex((y:any) => y.Folder_Id == folder.Folder_Id);
+          localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Folders.splice(foundIndex, 1, folder);
+          this.ReplaceDataInLocal(localData[0]).subscribe((res:any) => {
+            observer.next(true);
+            observer.complete();
+          });
+        })
+      }
+      catch(ex){
+        observer.next(false);
+        observer.complete();
+      }
+    })
+    return finalData;
+  }
+
+  UpdateFileToLocalBase(file:any, serverId:any){
+    let finalData = new Observable((observer:any) => {
+      try{
+        this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+          let localData = resultGET;
+          let foundIndex = localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Files.findIndex((y:any) => y.Files_Id == file.Files_Id);
+          localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Files.splice(foundIndex, 1, file);
           this.ReplaceDataInLocal(localData[0]).subscribe((res:any) => {
             observer.next(true);
             observer.complete();

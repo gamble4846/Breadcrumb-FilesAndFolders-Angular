@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
 import { CustomNotificationService } from 'src/app/Services/CustomNotification/custom-notification.service';
+import { GoogleAppScritsService } from 'src/app/Services/GoogleAppScripts/google-app-scrits.service';
 import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class FoldersFilesComponent implements OnInit {
   OpenedGoogleDriveFileEmbbedLink:any = "";
   CurrentLocationGre4:boolean = false;
 
-  constructor(private customNotificationService: CustomNotificationService,public _cs : CommonServicesService, private route: ActivatedRoute, private router:Router, private LocalBase:LocalBaseService) { }
+  constructor(private googleAppScritsService: GoogleAppScritsService, private customNotificationService: CustomNotificationService,public _cs : CommonServicesService, private route: ActivatedRoute, private router:Router, private LocalBase:LocalBaseService) { }
 
   ngOnInit(): void {
     this.StartUpFun();
@@ -290,5 +291,58 @@ export class FoldersFilesComponent implements OnInit {
 
   CreateFolderClicked(){
     document.getElementById("create-folder-modal")?.classList.add("open");
+  }
+
+  UpdateStared(data:any, isFolder:boolean){
+    data.Is_Stared = !data.Is_Stared;
+    let values:any = {
+      "Server_ID": this.ServerIDURL,
+      "Is_Stared": data.Is_Stared,
+      "Is_Folder": isFolder
+    };
+
+    if(isFolder){
+      values.Prime_ID = data.Folder_Id;
+      this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+        document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+      })
+    }
+    else{
+      values.Prime_ID = data.Files_Id;
+      this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+        document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+      })
+    }
+
+    this.googleAppScritsService.PutStar(values).subscribe((response:any) => {
+      if(response.status == "200"){
+        if(isFolder){
+          this.LocalBase.UpdateFolderToLocalBase(response.data, this.ServerIDURL).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+          })
+        }
+        else{
+          this.LocalBase.UpdateFileToLocalBase(response.data, this.ServerIDURL).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+          })
+        }
+      }
+      else{
+        console.log(response);
+      }
+    },
+    (error) => {
+      data.Is_Stared = !data.Is_Stared;
+      if(isFolder){
+        this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+          document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+        })
+      }
+      else{
+        this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+          document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+        })
+      }
+    });
   }
 }

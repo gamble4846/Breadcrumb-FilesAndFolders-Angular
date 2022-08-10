@@ -136,7 +136,8 @@
                 </div>
               </div>
               <div class="fileFolderRight">
-                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
+                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600" *ngIf="!data.Is_Stared" (click)="UpdateStared(data,true)">
+                <img src="../../../assets/svgs/star_selected.svg" class="fileFolderStarIcon hideBefore600" *ngIf="data.Is_Stared" (click)="UpdateStared(data,true)">
                 <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
               </div>
             </div>
@@ -157,7 +158,8 @@
                 </div>
               </div>
               <div class="fileFolderRight">
-                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600">
+                <img src="../../../assets/svgs/star.svg" class="fileFolderStarIcon hideBefore600" *ngIf="!data.Is_Stared" (click)="UpdateStared(data,false)">
+                <img src="../../../assets/svgs/star_selected.svg" class="fileFolderStarIcon hideBefore600" *ngIf="data.Is_Stared" (click)="UpdateStared(data,false)">
                 <img src="../../../assets/svgs/tripleDot.svg" class="fileFolderTripleDotIcon hideAfter600">
               </div>
             </div>
