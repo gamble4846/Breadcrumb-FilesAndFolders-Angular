@@ -29,6 +29,7 @@ import { CreateFolderModalComponent } from './Components/create-folder-modal/cre
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { CreateFileModalComponent } from './Components/create-file-modal/create-file-modal.component';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -44,7 +45,8 @@ registerLocaleData(en);
     FoldersFilesComponent,
     FileViewerComponent,
     SettingsComponent,
-    CreateFolderModalComponent
+    CreateFolderModalComponent,
+    CreateFileModalComponent
   ],
   imports: [
     BrowserModule,

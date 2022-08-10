@@ -360,4 +360,8 @@ export class FoldersFilesComponent implements OnInit {
       }
     });
   }
+
+  CreateSingleFileClicked(){
+    document.getElementById("create-file-modal")?.classList.add("open");
+  }
 }
