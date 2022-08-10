@@ -143,7 +143,7 @@
             </div>
           </td>
           <td class="hideBefore600">
-              <div class="eclipsis-div">--</div>
+              <div class="eclipsis-div">{{data.Created_On}}</div>
           </td>
         </tr>
         <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files" (contextmenu)="showRightClickMenu($event)">
@@ -165,7 +165,7 @@
             </div>
           </td>
           <td class="hideBefore600">
-              <div class="eclipsis-div">--</div>
+              <div class="eclipsis-div">{{data.Created_On}}</div>
           </td>
         </tr>
       </tbody>
