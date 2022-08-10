@@ -4,8 +4,8 @@
       <div class="gs-dropbox-file-model-header-close-button" (click)="closeCreateFile()"><img src="../../../assets/svgs/cancel.svg"></div>
     </div>
     <div class="gs-dropbox-create-folder-model-content">
-      <form nz-form [formGroup]="CreateFileForm" (ngSubmit)="submitCreateFolderForm()">
-        <nz-form-item>
+      <form nz-form [formGroup]="CreateFileForm" (ngSubmit)="submitCreateFileForm()">
+        <!-- <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Folder_Name" nzRequired>Folder Name</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFolder_Name">
             <input nz-input type="text" formControlName="Folder_Name" id="Folder_Name" />
@@ -33,7 +33,7 @@
           <nz-form-control [nzSpan]="14" [nzOffset]="6">
             <button nz-button nzType="primary">Create Folder</button>
           </nz-form-control>
-        </nz-form-item>
+        </nz-form-item> -->
       </form>
     </div>
   </div>

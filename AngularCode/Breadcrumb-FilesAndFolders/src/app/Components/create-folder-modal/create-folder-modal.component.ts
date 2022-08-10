@@ -51,6 +51,11 @@ export class CreateFolderModalComponent implements OnInit {
     console.log(this.ServerIDURL);
     var currentdate:any = new Date();
     currentdate = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+    if(!formObj.Folder_Info){
+      formObj.Folder_Info = "-";
+    }
+
     let toSheetObj = {
       Folder_Name : formObj.Folder_Name,
       Folder_Info : formObj.Folder_Info,
@@ -59,6 +64,8 @@ export class CreateFolderModalComponent implements OnInit {
       Folder_UpperFolderId: this.UpperFolderIDURL,
       TodayDateTime : currentdate
     }
+
+    console.log(toSheetObj);
 
     this.GoogleAppScripts.PostCreateFolder(toSheetObj).subscribe((response:any) => {
       if(response.status == "200"){
