@@ -850,6 +850,25 @@ body{
 .gs-dropbox-create-folder-model-content{
   height: calc(100% - (var(--gs-dropbox-file-model-header-height)));
   padding: 0px 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fullPageLoaderContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: #ffffff78;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.fullPageLoaderContainer.show{
+  display: flex;
 }
 
 @media screen and (max-width: 1050px) {

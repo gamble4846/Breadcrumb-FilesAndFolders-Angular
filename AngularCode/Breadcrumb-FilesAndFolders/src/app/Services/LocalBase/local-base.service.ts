@@ -199,5 +199,31 @@ export class LocalBaseService {
     })
     return finalData;
   }
+
+  AddFileToLocalBase(file:any,fileLink:any,serverId:any){
+    let finalData = new Observable((observer:any) => {
+      try{
+        this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+          let localData = resultGET;
+          localData[0].datas.find((x:any) => x.ServerID == serverId).Data.Files.push(file);
+          this.ReplaceDataInLocal(localData[0]).subscribe((res:any) => {
+            this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+              let localData = resultGET;
+              localData[0].datas.find((x:any) => x.ServerID == serverId).Data.File_Links.push(fileLink);
+              this.ReplaceDataInLocal(localData[0]).subscribe((res2:any) => {
+                observer.next(true);
+                observer.complete();
+              });
+            })
+          });
+        })
+      }
+      catch(ex){
+        observer.next(false);
+        observer.complete();
+      }
+    })
+    return finalData;
+  }
   // --------------------------------------------------------------------------------------------
 }

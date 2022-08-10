@@ -5,21 +5,30 @@
     </div>
     <div class="gs-dropbox-create-folder-model-content">
       <form nz-form [formGroup]="CreateFileForm" (ngSubmit)="submitCreateFileForm()">
-        <!-- <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Folder_Name" nzRequired>Folder Name</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFolder_Name">
-            <input nz-input type="text" formControlName="Folder_Name" id="Folder_Name" />
-            <ng-template #errorFolder_Name let-control>
-              <ng-container *ngIf="control.hasError('required')">Please Enter Folder Name</ng-container>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Files_Name" nzRequired>File Name</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFiles_Name">
+            <input nz-input type="text" formControlName="Files_Name" id="Files_Name" />
+            <ng-template #errorFiles_Name let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter File Name</ng-container>
             </ng-template>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Folder_Info">Folder Info</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFolder_Info">
-            <textarea formControlName="Folder_Info" id="Folder_Info" nz-input rows="5"></textarea>
-            <ng-template #errorFolder_Info let-control>
-              <ng-container *ngIf="control.hasError('required')">Please Enter Folder Info</ng-container>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="File_Type" nzRequired>File Type</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFile_Type">
+            <input nz-input type="text" formControlName="File_Type" id="File_Type" />
+            <ng-template #errorFile_Type let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter File Type</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Files_Info">File Info</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorFiles_Info">
+            <textarea formControlName="Files_Info" id="Files_Info" nz-input rows="5"></textarea>
+            <ng-template #errorFiles_Info let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter File Info</ng-container>
             </ng-template>
           </nz-form-control>
         </nz-form-item>
@@ -29,11 +38,56 @@
             <nz-switch formControlName="Is_Stared" id="Is_Stared"></nz-switch>
           </nz-form-control>
         </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Link_link" nzRequired>Link</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorLink_link">
+            <input nz-input type="text" formControlName="Link_link" id="Link_link" />
+            <ng-template #errorLink_link let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter Link</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Link_Size" nzRequired>Link Size</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorLink_Size">
+            <input nz-input type="text" formControlName="Link_Size" id="Link_Size" />
+            <ng-template #errorLink_Size let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter Link Size</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Link_Password">Link Password</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorLink_Password">
+            <input nz-input type="text" formControlName="Link_Password" id="Link_Password" />
+            <ng-template #errorLink_Password let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter Link Password</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Link_Desc">Link Description</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorLink_Desc">
+            <textarea formControlName="Link_Desc" id="Link_Desc" nz-input rows="5"></textarea>
+            <ng-template #errorLink_Desc let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter Link Description</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Link_Email">Email</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorLink_Email">
+            <input nz-input type="text" formControlName="Link_Email" id="Link_Email" />
+            <ng-template #errorLink_Email let-control>
+              <ng-container *ngIf="control.hasError('required')">Please Enter Email</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
         <nz-form-item nz-row>
           <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button nz-button nzType="primary">Create Folder</button>
+            <button nz-button nzType="primary">Create File</button>
           </nz-form-control>
-        </nz-form-item> -->
+        </nz-form-item>
       </form>
     </div>
   </div>

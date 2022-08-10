@@ -56,4 +56,24 @@ export class GoogleAppScritsService {
     }
     return this.http.post(this.apiLink, body, this.getOptions());
   }
+
+  PostCreateFile(values:any){
+    var body = {
+      "method": "POST",
+      "Action": "CREATESINGLEFILE",
+      "Server_ID": values.Server_ID,
+      "Files_Name": values.Files_Name.toString(),
+      "File_Type": values.File_Type.toString(),
+      "Files_UpperFolderId": values.Folder_UpperFolderId.toString(),
+      "Files_Info": values.Files_Info.toString(),
+      "Is_Stared": values.Is_Stared.toString(),
+      "Created_On": values.Created_On.toString(),
+      "Link_link": values.Link_link.toString(),
+      "Link_Size": values.Link_Size.toString(),
+      "Link_Password": values.Link_Password.toString(),
+      "Link_Email": values.Link_Email.toString(),
+      "Link_Desc": values.Link_Desc.toString()
+    }
+    return this.http.post(this.apiLink, body, this.getOptions());
+  }
 }

@@ -30,6 +30,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { CreateFileModalComponent } from './Components/create-file-modal/create-file-modal.component';
+import { FullPageLoaderComponent } from './Components/full-page-loader/full-page-loader.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -46,7 +48,8 @@ registerLocaleData(en);
     FileViewerComponent,
     SettingsComponent,
     CreateFolderModalComponent,
-    CreateFileModalComponent
+    CreateFileModalComponent,
+    FullPageLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ registerLocaleData(en);
     NzIconModule,
     NzSwitchModule,
     NzMessageModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzSpinModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

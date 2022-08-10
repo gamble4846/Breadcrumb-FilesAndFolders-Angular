@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
+import { CustomNotificationService } from 'src/app/Services/CustomNotification/custom-notification.service';
 import { GoogleAppScritsService } from 'src/app/Services/GoogleAppScripts/google-app-scrits.service';
 import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 
@@ -16,7 +17,7 @@ export class CreateFileModalComponent implements OnInit {
   ServerIDURL:string = "";
   UpperFolderIDURL:string = "";
 
-  constructor(private LocalBase:LocalBaseService, private fb: FormBuilder, private route: ActivatedRoute, public GoogleAppScripts: GoogleAppScritsService, public _cs : CommonServicesService) { }
+  constructor(private customNotificationService: CustomNotificationService, private LocalBase:LocalBaseService, private fb: FormBuilder, private route: ActivatedRoute, public GoogleAppScripts: GoogleAppScritsService, public _cs : CommonServicesService) { }
 
   ngOnInit(): void {
     this.CreateFileForm = this.fb.group({
@@ -43,7 +44,8 @@ export class CreateFileModalComponent implements OnInit {
 
   submitCreateFileForm(){
     if (this.CreateFileForm.valid) {
-      console.log(this.CreateFileForm.value);
+      this._cs.ShowFullPageLoader();
+      this.createFile(this.CreateFileForm.value);
     } else {
       Object.values(this.CreateFileForm.controls).forEach(control => {
         if (control.invalid) {
@@ -52,6 +54,61 @@ export class CreateFileModalComponent implements OnInit {
         }
       });
     }
+  }
+
+  createFile(formObj:any){
+    var currentdate:any = new Date();
+    currentdate = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+    if(!formObj.Files_Info){
+      formObj.Files_Info = "-";
+    }
+    if(!formObj.Link_Password){
+      formObj.Link_Password = "-";
+    }
+    if(!formObj.Link_Email){
+      formObj.Link_Email = "-";
+    }
+    if(!formObj.Link_Desc){
+      formObj.Link_Desc = "-";
+    }
+    formObj.Server_ID = this.ServerIDURL;
+    formObj.Folder_UpperFolderId = this.UpperFolderIDURL;
+    formObj.Created_On = currentdate;
+
+    this.GoogleAppScripts.PostCreateFile(formObj).subscribe((response:any) => {
+      try{
+        if(response.status == "200"){
+          console.log(response);
+          this.closeCreateFile();
+          this.LocalBase.AddFileToLocalBase(response.data.Files,response.data.File_Links,response.data.Server_ID).subscribe((res:any) => {
+            if(res){
+              this._cs.HideFullPageLoader();
+              this.customNotificationService.SmallMessage("success", "File Created");
+              document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+            }
+          });
+        }
+        else{
+          this._cs.HideFullPageLoader();
+          this.closeCreateFile();
+          this.customNotificationService.SmallMessage("error", "Error Creating File");
+          console.log(response);
+        }
+      }
+      catch(ex){
+        this._cs.HideFullPageLoader();
+        this.closeCreateFile();
+        this.customNotificationService.SmallMessage("error", "Error Creating File");
+        console.log(response);
+      }
+    },
+    (error) => {
+      this._cs.HideFullPageLoader();
+        this.closeCreateFile();
+        this.customNotificationService.SmallMessage("error", "Error Creating File");
+      console.log(error);
+    });
   }
 
 }

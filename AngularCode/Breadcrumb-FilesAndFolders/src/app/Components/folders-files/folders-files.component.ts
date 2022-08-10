@@ -309,7 +309,7 @@ export class FoldersFilesComponent implements OnInit {
     }
     else{
       values.Prime_ID = data.Files_Id;
-      this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+      this.LocalBase.UpdateFileToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
         document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
       })
     }
@@ -341,7 +341,19 @@ export class FoldersFilesComponent implements OnInit {
         }
       }
       else{
-        console.log(response);
+        data.Is_Stared = !data.Is_Stared;
+        if(isFolder){
+          this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+            this.customNotificationService.SmallMessage("error", "Error in Stared - Reverted");
+          })
+        }
+        else{
+          this.LocalBase.UpdateFileToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+            this.customNotificationService.SmallMessage("error", "Error in Stared - Reverted");
+          })
+        }
       }
     },
     (error) => {
@@ -353,7 +365,7 @@ export class FoldersFilesComponent implements OnInit {
         })
       }
       else{
-        this.LocalBase.UpdateFolderToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
+        this.LocalBase.UpdateFileToLocalBase(data, this.ServerIDURL).subscribe((res:any) => {
           document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
           this.customNotificationService.SmallMessage("error", "Error in Stared - Reverted");
         })

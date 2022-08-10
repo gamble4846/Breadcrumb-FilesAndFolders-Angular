@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServicesService } from 'src/app/Services/CommonServices/common-services.service';
+import { CustomNotificationService } from 'src/app/Services/CustomNotification/custom-notification.service';
 import { GoogleAppScritsService } from 'src/app/Services/GoogleAppScripts/google-app-scrits.service';
 import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 
@@ -15,7 +16,7 @@ export class CreateFolderModalComponent implements OnInit {
   ServerIDURL:string = "";
   UpperFolderIDURL:string = "";
 
-  constructor(private LocalBase:LocalBaseService, private fb: FormBuilder, private route: ActivatedRoute, public GoogleAppScripts: GoogleAppScritsService, public _cs : CommonServicesService) { }
+  constructor(private customNotificationService: CustomNotificationService,private LocalBase:LocalBaseService, private fb: FormBuilder, private route: ActivatedRoute, public GoogleAppScripts: GoogleAppScritsService, public _cs : CommonServicesService) { }
 
   ngOnInit(): void {
     this.CreateFolderForm = this.fb.group({
@@ -36,6 +37,7 @@ export class CreateFolderModalComponent implements OnInit {
 
   submitCreateFolderForm(): void {
     if (this.CreateFolderForm.valid) {
+      this._cs.ShowFullPageLoader();
       this.createFolder(this.CreateFolderForm.value);
     } else {
       Object.values(this.CreateFolderForm.controls).forEach(control => {
@@ -48,7 +50,6 @@ export class CreateFolderModalComponent implements OnInit {
   }
 
   createFolder(formObj:any){
-    console.log(this.ServerIDURL);
     var currentdate:any = new Date();
     currentdate = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
@@ -65,22 +66,36 @@ export class CreateFolderModalComponent implements OnInit {
       TodayDateTime : currentdate
     }
 
-    console.log(toSheetObj);
-
     this.GoogleAppScripts.PostCreateFolder(toSheetObj).subscribe((response:any) => {
-      if(response.status == "200"){
-       this.closeCreateFolder();
-       this.LocalBase.AddFolderToLocalBase(response.data.data,response.data.serverId).subscribe((res:any) => {
-        if(res){
-          document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
-        }
-       });
+      try{
+        if(response.status == "200"){
+          this.closeCreateFolder();
+          this.LocalBase.AddFolderToLocalBase(response.data.data,response.data.serverId).subscribe((res:any) => {
+           if(res){
+             this._cs.HideFullPageLoader();
+             this.customNotificationService.SmallMessage("success", "Folder Created");
+             document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+           }
+          });
+         }
+         else{
+           this._cs.HideFullPageLoader();
+           this.closeCreateFolder();
+           this.customNotificationService.SmallMessage("error", "Error Creating Folder");
+           console.log(response);
+         }
       }
-      else{
+      catch(ex){
+        this._cs.HideFullPageLoader();
+        this.closeCreateFolder();
+        this.customNotificationService.SmallMessage("error", "Error Creating Folder");
         console.log(response);
       }
     },
     (error) => {
+      this._cs.HideFullPageLoader();
+      this.closeCreateFolder();
+      this.customNotificationService.SmallMessage("error", "Error Creating Folder");
       console.log(error);
     });
   }

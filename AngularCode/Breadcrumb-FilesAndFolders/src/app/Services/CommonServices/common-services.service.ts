@@ -47,4 +47,12 @@ export class CommonServicesService {
         return `../../../assets/svgs/unknownFile.svg`;
     }
   }
+
+  ShowFullPageLoader(){
+    document.getElementById("fullPageLoaderContainer")?.classList.add("show");
+  }
+
+  HideFullPageLoader(){
+    document.getElementById("fullPageLoaderContainer")?.classList.remove("show");
+  }
 }
