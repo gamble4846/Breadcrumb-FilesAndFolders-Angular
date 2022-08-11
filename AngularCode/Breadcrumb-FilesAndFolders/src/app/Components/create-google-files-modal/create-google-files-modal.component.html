@@ -1,0 +1,42 @@
+<div class="create-folder-modal-container" id="create-google-files-modal">
+    <div class="gs-dropbox-file-model-header">
+      <div class="gs-dropbox-file-model-header-file-name">Create Google Files</div>
+      <div class="gs-dropbox-file-model-header-close-button" (click)="closeCreateGoogleFiles()"><img src="../../../assets/svgs/cancel.svg"></div>
+    </div>
+    <div class="gs-dropbox-create-folder-model-content">
+      <div class="create-google-files-form">
+        <label>Folder Link Or Id: </label>
+        <input nz-input placeholder="Enter Folder Link Or Id" [(ngModel)]="FolderLinkOrId" />
+        <div class="myErrorDiv" id="FolderLinkOrIdError">{{this.FolderLinkOrIdErrorValue}}</div>
+        <div class="gs-squareButtonBlue getFilesButtons" (click)="GetFilesClicked()">
+          <div class="uploadButtonContent">
+            <span class="uploadButtonContentText">Get Files</span>
+          </div>
+        </div>
+      </div>
+      <div class="FilesDataTableContainer">
+        <nz-table #rowSelectionTable [nzData]="FileData" nzBordered>
+          <thead>
+            <tr>
+              <th [(nzChecked)]="AllFilesChecked" (nzCheckedChange)="onAllFilesSelected($event)" nzWidth="5%"></th>
+              <th>File Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data">
+              <td [nzChecked]="SelectedFiles.includes(data.id)" (nzCheckedChange)="onFileChecked(data.id, $event)"></td>
+              <td nzEllipsis>{{ data.title }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+
+      <div class="gs-squareButtonBlue getFilesButtons" (click)="AddSelectedFiles()" [ngClass]="{'disabled': SelectedFiles.length == 0}">
+        <div class="uploadButtonContent">
+          <span class="uploadButtonContentText">Add Selected Files</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  

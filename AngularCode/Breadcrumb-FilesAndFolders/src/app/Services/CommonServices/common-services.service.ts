@@ -48,7 +48,16 @@ export class CommonServicesService {
     }
   }
 
-  ShowFullPageLoader(){
+  ShowFullPageLoader(textToShowUnder:any = null){
+    console.log(textToShowUnder);
+    if(textToShowUnder){
+      let x:any = document.getElementById("fullPageLoaderText");
+      x.innerHTML = textToShowUnder;
+    }
+    else{
+      let x:any = document.getElementById("fullPageLoaderText");
+      x.innerHTML = "";
+    }
     document.getElementById("fullPageLoaderContainer")?.classList.add("show");
   }
 

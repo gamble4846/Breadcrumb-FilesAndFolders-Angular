@@ -73,7 +73,7 @@ export class CreateFileModalComponent implements OnInit {
       formObj.Link_Desc = "-";
     }
     formObj.Server_ID = this.ServerIDURL;
-    formObj.Folder_UpperFolderId = this.UpperFolderIDURL;
+    formObj.Files_UpperFolderId = this.UpperFolderIDURL;
     formObj.Created_On = currentdate;
 
     this.GoogleAppScripts.PostCreateFile(formObj).subscribe((response:any) => {

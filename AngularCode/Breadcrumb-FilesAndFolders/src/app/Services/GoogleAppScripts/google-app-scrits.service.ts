@@ -64,7 +64,7 @@ export class GoogleAppScritsService {
       "Server_ID": values.Server_ID,
       "Files_Name": values.Files_Name.toString(),
       "File_Type": values.File_Type.toString(),
-      "Files_UpperFolderId": values.Folder_UpperFolderId.toString(),
+      "Files_UpperFolderId": values.Files_UpperFolderId.toString(),
       "Files_Info": values.Files_Info.toString(),
       "Is_Stared": values.Is_Stared.toString(),
       "Created_On": values.Created_On.toString(),
@@ -75,5 +75,9 @@ export class GoogleAppScritsService {
       "Link_Desc": values.Link_Desc.toString()
     }
     return this.http.post(this.apiLink, body, this.getOptions());
+  }
+
+  GetFilesDataFromFolderId(link:any){
+    return this.http.get(link);
   }
 }

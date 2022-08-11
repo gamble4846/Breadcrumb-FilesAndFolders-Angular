@@ -32,6 +32,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { CreateFileModalComponent } from './Components/create-file-modal/create-file-modal.component';
 import { FullPageLoaderComponent } from './Components/full-page-loader/full-page-loader.component';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { CreateGoogleFilesModalComponent } from './Components/create-google-files-modal/create-google-files-modal.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -49,7 +51,8 @@ registerLocaleData(en);
     SettingsComponent,
     CreateFolderModalComponent,
     CreateFileModalComponent,
-    FullPageLoaderComponent
+    FullPageLoaderComponent,
+    CreateGoogleFilesModalComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ registerLocaleData(en);
     NzSwitchModule,
     NzMessageModule,
     NzNotificationModule,
-    NzSpinModule
+    NzSpinModule,
+    NzTableModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

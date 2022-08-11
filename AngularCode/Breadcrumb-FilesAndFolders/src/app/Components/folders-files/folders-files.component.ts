@@ -135,10 +135,12 @@ export class FoldersFilesComponent implements OnInit {
       if(this.ServerIDURL == "" || this.ServerIDURL == null || this.ServerIDURL == undefined){
         this.getServerList();
         this.onlyServers = true;
+        document.getElementById("gs-squareButtonUpload")?.classList.add("disabledCreateButton");
       }
       else{
         this.getFoldersFiles();
         this.onlyServers = false;
+        document.getElementById("gs-squareButtonUpload")?.classList.remove("disabledCreateButton");
       }
     });
 
@@ -375,5 +377,9 @@ export class FoldersFilesComponent implements OnInit {
 
   CreateSingleFileClicked(){
     document.getElementById("create-file-modal")?.classList.add("open");
+  }
+
+  CreateGoogleFilesClicked(){
+    document.getElementById("create-google-files-modal")?.classList.add("open");
   }
 }

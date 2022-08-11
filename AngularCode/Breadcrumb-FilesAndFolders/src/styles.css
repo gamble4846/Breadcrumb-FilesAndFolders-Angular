@@ -871,6 +871,40 @@ body{
   display: flex;
 }
 
+.disabledCreateButton{
+  pointer-events: none;
+  cursor: no-drop;
+  background-color: #699df4;
+}
+
+.getFilesButtons{
+  max-width: 150px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.FilesDataTableContainer{
+  margin-bottom: 10px;
+}
+
+.myErrorDiv{
+  color: red;
+  font-size: 12px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.myErrorDiv.show{
+  opacity: 1;
+}
+
+.gs-squareButtonBlue.disabled{
+  pointer-events: none;
+  cursor: no-drop;
+  background-color: #699df4;
+}
+
 @media screen and (max-width: 1050px) {
   .gs-dropbox-right {
       display: none;
