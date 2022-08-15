@@ -124,7 +124,7 @@
       </tbody>
 
       <tbody *ngIf="!onlyServers">
-        <tr *ngFor="let data of FoldersFilesObj.Folders" (contextmenu)="showRightClickMenu($event)">
+        <tr *ngFor="let data of FoldersFilesObj.Folders" (contextmenu)="showRightClickMenu($event, data, true)">
           <td>
             <div class="fileFolderContainer">
               <div class="fileFolderLeft">
@@ -146,7 +146,7 @@
               <div class="eclipsis-div">{{data.Created_On}}</div>
           </td>
         </tr>
-        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files" (contextmenu)="showRightClickMenu($event)">
+        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files" (contextmenu)="showRightClickMenu($event, data, false)">
           <td>
             <div class="fileFolderContainer">
               <div class="fileFolderLeft">

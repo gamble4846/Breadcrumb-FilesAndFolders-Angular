@@ -860,7 +860,7 @@ body{
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999;
+  z-index: 999999;
   background-color: #ffffff78;
   justify-content: center;
   align-items: center;
@@ -903,6 +903,16 @@ body{
   pointer-events: none;
   cursor: no-drop;
   background-color: #699df4;
+}
+
+.gs-drop-box-rename-popOver{
+  min-width: 200px;
+}
+
+.gs-drop-box-rename-popOver-Save-Container{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 1050px) {

@@ -40,13 +40,21 @@ export class FoldersFilesComponent implements OnInit {
 
   fullDocumentClick(event:any){
     var rightClickMenu:any = document.getElementById("gs-drop-box-right-click-menu");
-    if(!rightClickMenu.contains(event.target)){
-        rightClickMenu.classList.remove("open");
-        var trsHovered = document.getElementsByClassName("gs-folder-files-table-tr-hover");
-        for (let index = 0; index < trsHovered.length; index++) {
-            const trHovered = trsHovered[index];
-            trHovered.classList.remove("gs-folder-files-table-tr-hover");
-        }
+    var renamepopOver:any = document.getElementById("gs-drop-box-rename-popOver");
+
+    var hideRightClickMenu:boolean = false;
+
+    if(!rightClickMenu.contains(event.target) && !renamepopOver){
+      hideRightClickMenu = true;
+    }
+
+    if(hideRightClickMenu){
+      rightClickMenu.classList.remove("open");
+      var trsHovered = document.getElementsByClassName("gs-folder-files-table-tr-hover");
+      for (let index = 0; index < trsHovered.length; index++) {
+          const trHovered = trsHovered[index];
+          trHovered.classList.remove("gs-folder-files-table-tr-hover");
+      }
     }
 
     try{
@@ -68,7 +76,7 @@ export class FoldersFilesComponent implements OnInit {
     catch(ex){}
   }
 
-  showRightClickMenu(event:any){
+  showRightClickMenu(event:any, data:any, isFolder:boolean){
     var trsHovered = document.getElementsByClassName("gs-folder-files-table-tr-hover");
     for (let index = 0; index < trsHovered.length; index++) {
         const trHovered = trsHovered[index];
@@ -98,6 +106,17 @@ export class FoldersFilesComponent implements OnInit {
     }
 
     rightClickMenu.style.maxHeight = (_docHeight - event.clientY - 20) + "px";
+
+    //-------------Setting Data----------------
+    var rightClickData:any = {
+      data: data,
+      isFolder: isFolder,
+      ServerId: this.ServerIDURL
+    }
+    localStorage.setItem("rightClickData", JSON.stringify(rightClickData));
+    document.getElementById("getFileDataHiddenBTN")?.click();
+    //getFileDataHiddenBTN.click();
+    //-----------------------------------------
   }
 
   showUploadDropDown(){
@@ -108,18 +127,6 @@ export class FoldersFilesComponent implements OnInit {
   showCreateDropDown(){
     var dropDown:any = document.getElementById("gs-drop-down-for-create-button");
     dropDown.classList.add("open");
-  }
-
-  setUpRightClickEvents(){
-
-  }
-
-  updateRightClickEvent(){
-    var rightClickElements = document.getElementsByClassName("allowRightClick");
-    for (let index = 0; index < rightClickElements.length; index++) {
-      const rightClickElement = rightClickElements[index];
-      rightClickElement.addEventListener("contextmenu", this.showRightClickMenu);
-    }
   }
 
   StartUpFun(){
@@ -143,8 +150,6 @@ export class FoldersFilesComponent implements OnInit {
         document.getElementById("gs-squareButtonUpload")?.classList.remove("disabledCreateButton");
       }
     });
-
-    this.updateRightClickEvent();
   }
 
   NextFile_(){

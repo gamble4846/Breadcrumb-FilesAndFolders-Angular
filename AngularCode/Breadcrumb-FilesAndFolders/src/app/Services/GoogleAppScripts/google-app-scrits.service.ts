@@ -80,4 +80,16 @@ export class GoogleAppScritsService {
   GetFilesDataFromFolderId(link:any){
     return this.http.get(link);
   }
+
+  PutRename(values:any){
+    var body = {
+      "method": "PUT",
+      "Action": "RENAME",
+      "Server_ID": values.Server_ID.toString(),
+      "Prime_ID": values.Prime_ID.toString(),
+      "NewName": values.NewName.toString(),
+      "Is_Folder": values.Is_Folder.toString()
+  }
+    return this.http.post(this.apiLink, body, this.getOptions());
+  }
 }
