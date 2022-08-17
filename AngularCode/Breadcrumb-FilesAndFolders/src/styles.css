@@ -72,7 +72,7 @@ body{
 
 .gs-bropbox-center{
   height: 100%;
-  width: 100%;
+  width: calc(100vw - (var(--gs-dropbox-left-width) - var(--gs-dropbox-right-width))) !important;
 }
 
 .gs-dropbox-right{
@@ -944,11 +944,7 @@ body{
   }
 
   .gs-dropbox-navbar-right{
-      width: 100%;
-  }
-
-  .gs-bropbox-center{
-      width: 100%;
+    width: 100%;
   }
 
   .gs-dropbox-navbar-left{

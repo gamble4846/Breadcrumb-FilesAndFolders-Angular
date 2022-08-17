@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { LocalBaseService } from 'src/app/Services/LocalBase/local-base.service';
 
 @Component({
   selector: 'app-right-menu',
@@ -8,7 +9,18 @@ import { DOCUMENT } from '@angular/common';
 })
 export class RightMenuComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  currentFolder:any = {
+    Created_On: null,
+    Deleted_On: null,
+    Folder_Id: null,
+    Folder_Info: null,
+    Folder_Name: null,
+    Folder_UpperFolderId: null,
+    Is_Deleted: null,
+    Is_Stared: null
+  }
+
+  constructor(@Inject(DOCUMENT) private document: Document, private LocalBase:LocalBaseService) { }
 
   ngOnInit(): void {
     var rightPanelSectionContainers:any = document.getElementsByClassName("rightPanelSectionContainer");
@@ -45,5 +57,28 @@ export class RightMenuComponent implements OnInit {
     }
     catch(ex){}
     container.classList.add("open");
+  }
+
+  UpdateRightMenuData(){
+    var CurrentFolderData:any = localStorage.getItem("CurrentFolderData");
+    CurrentFolderData = JSON.parse(CurrentFolderData);
+
+    this.LocalBase.GetFolderDataFromId(CurrentFolderData.FolderId, CurrentFolderData.ServerId).subscribe((res:any) => {
+      if(!res){
+        this.currentFolder = {
+          Created_On: null,
+          Deleted_On: null,
+          Folder_Id: null,
+          Folder_Info: null,
+          Folder_Name: null,
+          Folder_UpperFolderId: null,
+          Is_Deleted: null,
+          Is_Stared: null
+        }
+      }
+      else{
+        this.currentFolder = res;
+      }
+    })
   }
 }

@@ -147,9 +147,19 @@ export class FoldersFilesComponent implements OnInit {
       else{
         this.getFoldersFiles();
         this.onlyServers = false;
+        this.UpdateRightMenu();
         document.getElementById("gs-squareButtonUpload")?.classList.remove("disabledCreateButton");
       }
     });
+  }
+
+  UpdateRightMenu(){
+    var currentFolderData:any = {
+      FolderId: this.UpperFolderIDURL,
+      ServerId: this.ServerIDURL
+    }
+    localStorage.setItem("CurrentFolderData", JSON.stringify(currentFolderData));
+    document.getElementById("UpdateRightMenuDataBTNHidden")?.click();
   }
 
   NextFile_(){

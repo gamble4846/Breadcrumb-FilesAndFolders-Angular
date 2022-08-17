@@ -49,6 +49,18 @@ export class LocalBaseService {
     return finalData;
   }
 
+  GetFolderDataFromId(FolderId:any, ServerId:any){
+    let finalData = new Observable((observer:any) => {
+      this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+        let currentServer = resultGET[0].datas.find((x:any) => x.ServerID == ServerId);
+        let currentFolder = currentServer.Data.Folders.find((x:any) => x.Folder_Id == FolderId);
+        observer.next(currentFolder);
+        observer.complete();
+      });
+    })
+    return finalData;
+  }
+
   GetFoldersFilesByUpperFolderID(UpperFolderID:any, ServerID:string, deleteType:number = 1){
     let finalData = new Observable((observer:any) => {
       this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
