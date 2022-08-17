@@ -72,7 +72,7 @@ body{
 
 .gs-bropbox-center{
   height: 100%;
-  width: calc(100vw - (var(--gs-dropbox-left-width) - var(--gs-dropbox-right-width))) !important;
+  width: calc(100vw - (var(--gs-dropbox-left-width) - var(--gs-dropbox-right-width)));
 }
 
 .gs-dropbox-right{
@@ -934,6 +934,11 @@ body{
       transition: 0.3s ease-in-out;
   }
 
+  .gs-bropbox-center{
+    height: 100%;
+    width: calc(100vw - (var(--gs-dropbox-right-width)));
+  }
+
   .gs-dropbox-left.open{
       left: 0;
   }
@@ -966,6 +971,8 @@ body{
   .gs-dropbox-search-modal.open{
       width: 100vw;
   }
+
+  
 }
 
 @media screen and (max-width: 600px) {
