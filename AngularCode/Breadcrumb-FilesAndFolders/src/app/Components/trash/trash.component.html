@@ -1,0 +1,93 @@
+<div class="gs-bropbox-center-bread-crumb-and-layout-button-container" style="height: 0px;">
+  
+</div>
+
+<div class="gs-dropbox-center-header-buttons-container" style="height: 0px;">
+
+</div>
+
+<div class="gs-dropbox-center-folder-files-container">
+    <table class="gs-folder-files-table">
+      <thead>
+        <tr>
+          <th width="80%"><div class="eclipsis-div">Name</div></th>
+          <th width="20%" class="hideBefore600"><div class="eclipsis-div">Restore</div></th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="onlyServers">
+        <tr *ngFor="let data of ServersList" class="allowRightClick">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC('server')" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div" (click)="ServerClicked(data)">
+                  {{data}}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="hideBefore600">
+              <div class="eclipsis-div">--</div>
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="!onlyServers">
+        <tr *ngFor="let data of FoldersFilesObj.Folders">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC('folder')" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div">
+                  {{data.Folder_Name}}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="hideBefore600">
+            <div class="eclipsis-div">
+              <div class="eclipsis-div">
+                <div class="gs-dropbox-center-header-buttons-container-right" style="width: max-content;" (click)="RestoreFileFolder(data, true)">
+                  <div class="gs-squareButtonGrey">
+                    <div class="createButtonContent">
+                      <img src="../../../assets/svgs/restore.svg" class="refreshIconCenterDrop">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="allowRightClick" *ngFor="let data of FoldersFilesObj.Files">
+          <td>
+            <div class="fileFolderContainer">
+              <div class="fileFolderLeft">
+                <div class="fileFolderIconContainer">
+                  <img [src]="GetIconSRC(data.File_Type)" class="fileFolderIcon">
+                </div>
+                <div class="fileFolderName eclipsis-div">
+                  {{data.Files_Name}}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="eclipsis-div">
+              <div class="gs-dropbox-center-header-buttons-container-right" style="width: max-content;" (click)="RestoreFileFolder(data, false)">
+                <div class="gs-squareButtonGrey">
+                  <div class="createButtonContent">
+                    <img src="../../../assets/svgs/restore.svg" class="refreshIconCenterDrop">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

@@ -35,6 +35,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { CreateGoogleFilesModalComponent } from './Components/create-google-files-modal/create-google-files-modal.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { TrashComponent } from './Components/trash/trash.component';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -53,7 +55,8 @@ registerLocaleData(en);
     CreateFolderModalComponent,
     CreateFileModalComponent,
     FullPageLoaderComponent,
-    CreateGoogleFilesModalComponent
+    CreateGoogleFilesModalComponent,
+    TrashComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ registerLocaleData(en);
     NzNotificationModule,
     NzSpinModule,
     NzTableModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzPopconfirmModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

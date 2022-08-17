@@ -27,14 +27,49 @@ export class LocalBaseService {
     return finalData;
   }
 
-  GetFoldersFilesByUpperFolderID(UpperFolderID:any, ServerID:string){
+  GetDeletedFoldersFiles(ServerID:string){
     let finalData = new Observable((observer:any) => {
       this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
         let currentServer = resultGET[0].datas.find((x:any) => x.ServerID == ServerID);
         let currentFolder = currentServer.Data.Folders;
         let currentFiles = currentServer.Data.Files;
-        let FoldersList = currentFolder.filter((x:any) => x.Folder_UpperFolderId == UpperFolderID);
-        let FilesList = currentFiles.filter((x:any) => x.Files_UpperFolderId == UpperFolderID);
+        let FoldersList = currentFolder.filter((x:any) => x.Is_Deleted);
+        let FilesList = currentFiles.filter((x:any) => x.Is_Deleted);
+
+        let toReturnData = {
+          Folders: FoldersList,
+          Files: FilesList,
+          ServerId: ServerID
+        }
+
+        observer.next(toReturnData);
+        observer.complete();
+      });
+    })
+    return finalData;
+  }
+
+  GetFoldersFilesByUpperFolderID(UpperFolderID:any, ServerID:string, deleteType:number = 1){
+    let finalData = new Observable((observer:any) => {
+      this.db.collection('FoldersAndFiles').get().then((resultGET:any) => {
+        let currentServer = resultGET[0].datas.find((x:any) => x.ServerID == ServerID);
+        let currentFolder = currentServer.Data.Folders;
+        let currentFiles = currentServer.Data.Files;
+        let FoldersList:any = null;
+        let FilesList:any = null;
+
+        if(deleteType == 1){
+          FoldersList = currentFolder.filter((x:any) => x.Folder_UpperFolderId == UpperFolderID && !x.Is_Deleted);
+          FilesList = currentFiles.filter((x:any) => x.Files_UpperFolderId == UpperFolderID && !x.Is_Deleted);
+        }
+        else if(deleteType == 2){
+          FoldersList = currentFolder.filter((x:any) => x.Folder_UpperFolderId == UpperFolderID && x.Is_Deleted);
+          FilesList = currentFiles.filter((x:any) => x.Files_UpperFolderId == UpperFolderID && x.Is_Deleted);
+        }
+        else if(deleteType == 3){
+          FoldersList = currentFolder.filter((x:any) => x.Folder_UpperFolderId == UpperFolderID);
+          FilesList = currentFiles.filter((x:any) => x.Files_UpperFolderId == UpperFolderID);
+        }
 
         let toReturnData = {
           Folders: FoldersList,

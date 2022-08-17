@@ -28,6 +28,8 @@ export class RightClickMenuComponent implements OnInit {
     var rightClickData:any = localStorage.getItem("rightClickData");
     rightClickData = JSON.parse(rightClickData);
 
+    console.log(rightClickData);
+
     this.isFolder = rightClickData.isFolder;
     this.currentData = rightClickData.data;
     this.ServerId = rightClickData.ServerId;
@@ -104,6 +106,57 @@ export class RightClickMenuComponent implements OnInit {
       this._cs.copyText(links[0].Link_link);
       this.cusNoti.SmallMessage('success', 'Link Copied');
       document.getElementById("NothingButton")?.click();
+    });
+  }
+
+  DeleteFileFolder(){
+    this._cs.ShowFullPageLoader();
+    
+    var currentdate:any = new Date();
+    currentdate = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+    
+    let values:any = {
+      "Server_ID": this.ServerId,
+      "Prime_ID": this.Prime_ID,
+      "Is_Deleted": true,
+      "Deleted_On": currentdate,
+      "Is_Folder": this.isFolder
+    }
+    this.gas.DeleteFolderFile(values).subscribe((response:any) => {
+      console.log(response);
+      if(response.status == "200"){
+        this._cs.HideFullPageLoader();
+        if(this.isFolder){
+          this.lbs.UpdateFolderToLocalBase(response.data, this.ServerId).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+            this.cusNoti.SmallMessage("success", "Folder Deleted - " + response.data.Folder_Name);
+          })
+        }
+        else{
+          this.lbs.UpdateFileToLocalBase(response.data, this.ServerId).subscribe((res:any) => {
+            document.getElementById("refreshFilesAndFoldersOnlyLocalHiddenBTN")?.click();
+            this.cusNoti.SmallMessage("success", "File Deleted - " + response.data.Files_Name);
+          })
+        }
+      }
+      else{
+        this._cs.HideFullPageLoader();
+        if(this.isFolder){
+          this.cusNoti.SmallMessage("error", "Folder Not Deleted");
+        }
+        else{
+          this.cusNoti.SmallMessage("error", "File Not Deleted");
+        }
+      }
+    },
+    (error) => {
+      this._cs.HideFullPageLoader();
+      if(this.isFolder){
+        this.cusNoti.SmallMessage("error", "Folder Not Deleted");
+      }
+      else{
+        this.cusNoti.SmallMessage("error", "File Not Deleted");
+      }
     });
   }
 }

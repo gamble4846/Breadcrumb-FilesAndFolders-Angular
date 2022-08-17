@@ -13,6 +13,16 @@
                 </div>
             </div>
         </div>
+        <div class="gs-drop-box-right-click-menu-button" nz-popconfirm nzPopconfirmTitle="Are you sure delete?" (nzOnConfirm)="DeleteFileFolder()" nzPopconfirmPlacement="right">
+            <div class="gs-drop-box-right-click-menu-button-left">
+                <div class="gs-drop-box-right-click-menu-button-left-icon">
+                    <img src="../../../assets/svgs/delete.svg">
+                </div>
+                <div class="gs-drop-box-right-click-menu-button-left-text">
+                    Delete
+                </div>
+            </div>
+        </div>
     </div>
     <div class="gs-drop-box-right-click-menu-section" *ngIf="isFolder">
         <div class="gs-drop-box-right-click-menu-button">
