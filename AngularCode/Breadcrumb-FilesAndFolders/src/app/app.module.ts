@@ -37,6 +37,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { TrashComponent } from './Components/trash/trash.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 //----------------------------------------------------------------------------------------------
 
 registerLocaleData(en);
@@ -75,7 +77,13 @@ registerLocaleData(en);
     NzSpinModule,
     NzTableModule,
     NzPopoverModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
