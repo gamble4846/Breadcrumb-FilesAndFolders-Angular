@@ -1,6 +1,6 @@
 {
-  "name": "Breadcrumb-FilesAndFolders",
-  "short_name": "Breadcrumb-FilesAndFolders",
+  "name": "Files And Folders",
+  "short_name": "FnF",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
